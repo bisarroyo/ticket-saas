@@ -1,11 +1,13 @@
 'use client'
 
 import { useActionState } from 'react'
-import { login } from '@/app/actions'
+import { login } from '@/app/actions/authActions'
 
 export default function LoginPage() {
-  const [state, formAction, isPending] = useActionState(login, null)
-  console.log('state', state)
+  const [error, formAction, isPending] = useActionState(login, {
+    error: ''
+  })
+  console.log('state', error)
   return (
     <form action={formAction}>
       <label htmlFor='email'>Email:</label>
