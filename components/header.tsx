@@ -1,5 +1,5 @@
-import { createClient } from '@/utils/supabase/server'
-import { signOutAction } from '@/app/actions/authActions'
+// import { createClient } from '@/utils/supabase/server'
+// import { signOutAction } from '@/app/actions/authActions'
 import Logo from '@/components/ui/logo'
 import Link from 'next/link'
 // import UserDropdown from './ui/user-dropdown'
