@@ -1,27 +1,24 @@
 'use client'
 
 import Link from 'next/link'
-import { useActionState, useState } from 'react'
+import { useActionState } from 'react'
 import { login } from '@/app/actions/authActions'
 
-import { ArrowUpRight, Eye, EyeOff, Mail } from 'lucide-react'
+import { ArrowUpRight, Mail } from 'lucide-react'
 
 // Google auth components
 import socialAuth from '@/utils/supabase/social-auth'
 import AuthButtonGoogle from '@/components/auth/auth-button-google'
+import Input from '@/components/ui/input'
+import InputPassword from '@/components/ui/password'
+import Button from '@/components/ui/button'
 
 export default function LoginPage() {
-  const [error, formAction, isPending] = useActionState(login, {
-    error: ''
+  const [state, formAction, isPending] = useActionState(login, {
+    error: '',
+    inputs: { email: '', password: '' }
   })
 
-  const [showPassword, setShowPassword] = useState<boolean>(false)
-
-  const showPasswordField = () => {
-    setShowPassword(!showPassword)
-  }
-
-  console.log('state', error)
   return (
     <section className='container'>
       <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full max-w-[330px]'>
@@ -37,64 +34,47 @@ export default function LoginPage() {
           action={formAction}
           className='flex flex-col items-start justify-center w-full'
         >
-          <div className='flex flex-col w-full mb-4 relative'>
-            <label htmlFor='email'>Email:</label>
-            <input
-              id='email'
-              name='email'
-              type='email'
-              placeholder='nombre@email.com'
-              required
-              className='bg-transparent pl-4 pr-8 py-2 w-full border rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50 '
-            />
-            <Mail
-              strokeWidth={1.5}
-              size='20'
-              color='var(--muted-foreground)'
-              className='absolute bottom-3 end-2'
-            />
-          </div>
-          <div className='flex flex-col w-full mb-4 relative'>
-            <label htmlFor='password'>Password:</label>
-            <input
-              id='password'
-              name='password'
-              type={showPassword ? 'text' : 'password'}
-              placeholder='Ingresa tu contraseña'
-              required
-              className='bg-transparent pl-4 pr-8 py-2  w-full border rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50'
-            />
-            <div
-              onClick={showPasswordField}
-              className='absolute bottom-3 end-2 cursor-pointer'
-            >
-              {showPassword ? (
-                <Eye
-                  strokeWidth={1.5}
-                  size='20'
-                  color='var(--muted-foreground)'
-                />
-              ) : (
-                <EyeOff
-                  strokeWidth={1.5}
-                  size='20'
-                  color='var(--muted-foreground)'
-                />
-              )}
-            </div>
-          </div>
+          <Input
+            label='Email:'
+            id='email'
+            name='email'
+            type='email'
+            placeholder='nombre@email.com'
+            defaultValue={state?.inputs?.email}
+            required
+            icon={
+              <Mail
+                strokeWidth={1.5}
+                size='20'
+                color='var(--muted-foreground)'
+                className='absolute bottom-3 end-2'
+              />
+            }
+          />
+          <InputPassword
+            label='Contraseña:'
+            id='password'
+            name='password'
+            placeholder='Ingresa tu contraseña'
+            defaultValue={state?.inputs?.password}
+            required
+          />
+          {state.error && (
+            <p className='text-red-500 text-sm text-center w-full'>
+              {state.error}
+            </p>
+          )}
           <p className='w-full text-end'>
             <Link href='/forgot-passwpord' className=' text-primary'>
               ¿Olvidaste tu contraseña?
             </Link>
           </p>
-          <button
-            className='w-full text-md py-2 px-4 text-center bg-primary rounded-md text-white mt-4 hover:bg-primary-foreground focus:ring-4 focus:outline-none focus:ring-primary-foreground/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
+          <Button
+            text='Iniciar Sesión'
+            textLoading='Iniciando sesión...'
+            isPending={isPending}
             type='submit'
-            disabled={isPending}
-          >
-            {isPending ? 'Iniciando sesión...' : 'Iniciar sesión'}
-          </button>
+          />
         </form>
         <p className='text-center w-full mt-3 flex items-center justify-center gap-2'>
           ¿No tienes cuenta?{' '}
