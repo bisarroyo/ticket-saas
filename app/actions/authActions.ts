@@ -8,7 +8,7 @@ import { createClient } from '@/utils/supabase/server'
 export async function login(
   state: { error: string },
   formData: FormData
-): Promise<{ error: string }> {
+): Promise<{ error: string; inputs: { email: string; password: string } }> {
   const supabase = await createClient()
 
   // console.log('prevState', prevState)
@@ -21,13 +21,16 @@ export async function login(
   }
 
   if (!data.email || !data.password) {
-    return { error: 'Email and password are required.' }
+    return {
+      error: 'El correo electrónico o contraseña son requeridos',
+      inputs: data
+    }
   }
 
   const { error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
-    return { error: error.message }
+    return { error: 'Correo electrónico o contraseña incorrecta', inputs: data }
   }
 
   revalidatePath('/', 'layout')
