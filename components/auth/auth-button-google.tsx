@@ -1,7 +1,9 @@
 export default function AuthButtonGoogle({
-  socialAuth
+  socialAuth,
+  text
 }: {
   socialAuth: () => void
+  text?: string
 }) {
   return (
     <button
@@ -22,7 +24,7 @@ export default function AuthButtonGoogle({
           clipRule='evenodd'
         />
       </svg>
-      Inciar sesión con Google
+      {text ? text : 'Continuar con Google'}
     </button>
   )
 }
