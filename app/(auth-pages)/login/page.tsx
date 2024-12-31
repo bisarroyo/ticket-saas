@@ -13,7 +13,7 @@ import Input from '@/components/ui/input'
 import InputPassword from '@/components/ui/password'
 import Button from '@/components/ui/button'
 
-export default function LoginPage() {
+export default function Page() {
   const [state, formAction, isPending] = useActionState(login, {
     error: '',
     inputs: { email: '', password: '' }
@@ -24,11 +24,16 @@ export default function LoginPage() {
       <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full max-w-[330px]'>
         <h1 className='text-3xl'>Iniciar Sesión</h1>
         <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
-        <AuthButtonGoogle socialAuth={() => socialAuth('google')} />
-        <div className='my-4 flex items-center justify-between w-full'>
-          <span className='border w-12'></span>
-          <p className='w-fit text-muted'>O inicia sesión con tu correo</p>
-          <span className='border w-12'></span>
+        <AuthButtonGoogle
+          socialAuth={() => socialAuth('google')}
+          text='Inciar sesión con Google'
+        />
+        <div className='my-4 flex justify-center items-center w-full'>
+          <span className='border w-auto h-[1px] hidden sm:block'></span>
+          <p className='w-fit text-muted text-center'>
+            O Inicia sesión con tu correo
+          </p>
+          <span className='border w-auto hidden sm:block'></span>
         </div>
         <form
           action={formAction}
