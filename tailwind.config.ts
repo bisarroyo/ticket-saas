@@ -26,6 +26,10 @@ export default {
         muted: {
           DEFAULT: 'var(--muted)',
           foreground: 'var(--muted-foreground)'
+        },
+        danger: {
+          DEFAULT: 'var(--danger)',
+          foreground: 'var(--danger-foreground)'
         }
       }
     }

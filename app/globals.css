@@ -11,6 +11,8 @@
   --secondary-foreground: 0 0% 9%;
   --muted: #535353;
   --muted-foreground: #6b7280;
+  --danger: #f44336;
+  --danger-foreground: #fff;
 }
 
 /* @media (prefers-color-scheme: dark) {
