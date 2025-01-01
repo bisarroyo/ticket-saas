@@ -29,30 +29,44 @@ const InputPassword: React.FC<InputProps> = ({
     return error?.some((err) => err.type === type)
   }
   return (
-    <div className='flex flex-col w-full mb-4 relative'>
-      <label>
-        {label}
-        <input
-          id={id}
-          type={showPassword ? 'text' : 'password'}
-          className={cn(
-            'bg-transparent pl-4 pr-8 py-2  w-full border rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50',
-            checkType(error, id) && 'border-danger',
-            className
+    <div className='flex flex-col justify-start items-start w-full'>
+      <div className='flex flex-col w-full relative'>
+        <label>
+          {label}
+          <input
+            id={id}
+            type={showPassword ? 'text' : 'password'}
+            className={cn(
+              'bg-transparent pl-4 pr-8 py-2  w-full border rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50',
+              checkType(error, id) && 'border-danger focus:ring-danger',
+              className
+            )}
+            {...props}
+          />
+        </label>
+        <div
+          onClick={showPasswordField}
+          className='absolute bottom-0 end-0 cursor-pointer h-[42px] px-2 flex items-center justify-center'
+        >
+          {showPassword ? (
+            <Eye strokeWidth={1.5} size='20' color='var(--muted-foreground)' />
+          ) : (
+            <EyeOff
+              strokeWidth={1.5}
+              size='20'
+              color='var(--muted-foreground)'
+            />
           )}
-          {...props}
-        />
-      </label>
-      <div
-        onClick={showPasswordField}
-        className='absolute bottom-0 end-0 cursor-pointer h-[42px] px-2 flex items-center justify-center'
-      >
-        {showPassword ? (
-          <Eye strokeWidth={1.5} size='20' color='var(--muted-foreground)' />
-        ) : (
-          <EyeOff strokeWidth={1.5} size='20' color='var(--muted-foreground)' />
-        )}
+        </div>
       </div>
+      {error && (
+        <p className='text-red-500 text-sm w-full'>
+          {error?.map(
+            (error) =>
+              error.type === id && <span key={error.type}>{error.message}</span>
+          )}
+        </p>
+      )}
     </div>
   )
 }
