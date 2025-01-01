@@ -15,13 +15,19 @@ import Button from '@/components/ui/button'
 
 export default function Page() {
   const [state, formAction, isPending] = useActionState(login, {
-    error: '',
-    inputs: { email: '', password: '' }
+    success: false,
+    error: [{ type: '', message: '' }],
+    inputs: {
+      email: '',
+      fullname: '',
+      password: '',
+      passwordConfirm: ''
+    }
   })
 
   return (
     <section className='container'>
-      <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full max-w-[330px]'>
+      <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full md:max-w-[330px]'>
         <h1 className='text-3xl'>Iniciar Sesión</h1>
         <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
         <AuthButtonGoogle
@@ -37,7 +43,7 @@ export default function Page() {
         </div>
         <form
           action={formAction}
-          className='flex flex-col items-start justify-center w-full'
+          className='flex flex-col items-start justify-center w-full gap-4'
         >
           <Input
             label='Email:'
@@ -47,6 +53,7 @@ export default function Page() {
             placeholder='nombre@email.com'
             defaultValue={state?.inputs?.email}
             required
+            error={state.error}
             icon={
               <Mail
                 strokeWidth={1.5}
@@ -63,14 +70,10 @@ export default function Page() {
             placeholder='Ingresa tu contraseña'
             defaultValue={state?.inputs?.password}
             required
+            error={state.error}
           />
-          {state.error && (
-            <p className='text-red-500 text-sm text-center w-full'>
-              {state.error}
-            </p>
-          )}
           <p className='w-full text-end'>
-            <Link href='/forgot-passwpord' className=' text-primary'>
+            <Link href='/forgot-password' className=' text-primary'>
               ¿Olvidaste tu contraseña?
             </Link>
           </p>

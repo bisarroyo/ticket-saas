@@ -29,7 +29,7 @@ export default function Page() {
 
   return (
     <section className='container'>
-      <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full max-w-[660px]'>
+      <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full lg:max-w-[660px]'>
         <h1 className='text-3xl'>Registrarme</h1>
         <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
         <AuthButtonGoogle
@@ -74,6 +74,7 @@ export default function Page() {
               placeholder='Ingresa tu nombre'
               defaultValue={state?.inputs?.fullname}
               required
+              error={state.error}
               icon={
                 <Pencil
                   strokeWidth={1.5}
@@ -102,13 +103,6 @@ export default function Page() {
               error={state.error}
             />
           </div>
-          {state.error && (
-            <p className='text-red-500 text-sm text-center w-full'>
-              {state?.error?.map((error) => (
-                <span key={error.type}>{error.message}</span>
-              ))}
-            </p>
-          )}
           <Button
             text='Registrarme'
             textLoading='Registrando...'
