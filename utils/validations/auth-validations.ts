@@ -23,3 +23,18 @@ export const loginSchema = z.object({
     message: 'La contraseña debe tener al menos 8 caracteres.'
   })
 })
+
+export const forgotSchema = z.object({
+  email: z.string().email({
+    message: 'Debe ingresar una dirección de correo electrónico válida.'
+  })
+})
+
+export const resetSchema = z.object({
+  password: z.string().min(8, {
+    message: 'La contraseña debe tener al menos 8 caracteres.'
+  }),
+  passwordConfirm: z.string().min(8, {
+    message: 'La contraseña debe tener al menos 8 caracteres.'
+  })
+})
