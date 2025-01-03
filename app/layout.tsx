@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 // eventcontext
-import EventProvider from '@/app/context/eventprovider'
+// import EventProvider from '@/app/context/eventprovider'
 
 // import Header from '@/components/header'
 import './globals.css'
@@ -37,11 +37,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <EventProvider>
-          <Header />
-          {children}
-          <SpeedInsights />
-        </EventProvider>
+        <Header />
+        {children}
+        <SpeedInsights />
       </body>
     </html>
   )

@@ -10,6 +10,8 @@ import { eventStore } from '@/app/store/eventStore'
 export default function Events() {
   const { data: events, loading } = eventStore()
 
+  console.log(events)
+
   return (
     <>
       <main>

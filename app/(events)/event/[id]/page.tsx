@@ -1,35 +1,41 @@
 'use client'
 
 import { useParams } from 'next/navigation'
-import NotFound from '@/components/ui/not-found'
 import SingleEvent from '@/components/events/single-event'
-
-// state
-import { eventStore } from '@/app/store/eventStore'
+import NotFound from '@/components/ui/not-found'
 import Loading from '@/components/ui/loading'
 
-// types
-export interface EventData {
-  name: string
-  description: string
-  id: string
-  date: string
-  event_image: string
-  aditional_info: string
-  locations: {
-    id: string
-    name: string
-  }[]
-}
+// Zustand store
+import { eventStore } from '@/app/store/eventStore'
+import { useEffect } from 'react'
 
 export default function Event() {
   const params = useParams()
   const { id } = params
 
-  const { data, loading, error } = eventStore()
+  const { fetchById, getById, data, loading, error } = eventStore()
 
-  // Validar que `id` exista y sea válido
-  if (!id) {
+  useEffect(() => {
+    // Verificar si el evento ya está en el store
+    const event = id ? getById(id.toString()) : null
+    if (!event && id) {
+      fetchById(id.toString())
+    }
+  }, [fetchById, getById, id])
+
+  // Mostrar el componente de carga si aún no se han cargado los datos
+  if (loading) {
+    return (
+      <div className='container'>
+        <Loading />
+      </div>
+    )
+  }
+
+  // Manejar errores o casos donde no se encuentre el evento
+  const event = id ? getById(id.toString()) : null
+  console.log(data)
+  if (error || !id || !event) {
     return (
       <div className='container'>
         <NotFound />
@@ -37,33 +43,18 @@ export default function Event() {
     )
   }
 
-  // Buscar el evento correspondiente
-  const event = data.find((event) => event.id === id)
-
-  // Si ocurre un error en la obtención de datos
-  if (error || !event) {
-    return (
-      <div className='container'>
-        <NotFound />
-      </div>
-    )
-  }
-
+  // Renderizar el evento si todo está correcto
   return (
     <section className='my-5'>
-      {loading ? (
-        <Loading />
-      ) : (
-        <SingleEvent
-          id={event.id}
-          name={event.name}
-          url={event.event_image}
-          date={event.date}
-          location={event?.locations[0]?.name}
-          description={event.description}
-          aditional_info={event.aditional_info}
-        />
-      )}
+      <SingleEvent
+        id={event.id}
+        name={event.name}
+        url={event.event_image}
+        date={event.date}
+        location={event.locations[0]?.name || 'Ubicación no disponible'}
+        description={event.description}
+        aditional_info={event.aditional_info || 'Sin información adicional'}
+      />
     </section>
   )
 }

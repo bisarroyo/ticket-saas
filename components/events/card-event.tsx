@@ -23,7 +23,7 @@ export default function CardEvent({
   return (
     <Link href={url}>
       <div className='border rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out'>
-        <div>
+        <div className='aspect-[16/9]'>
           <Image
             src={image}
             width={500}

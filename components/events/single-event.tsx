@@ -1,7 +1,7 @@
 import EventHero from './event-hero'
 import EventDetails from './event-details'
 import EventDescription from './event-description'
-import EventLocation from './event-location'
+// import EventLocation from './event-location'
 import EventAditionalInfo from './event-aditional-info'
 
 import Button from '@/components/ui/button'
@@ -42,7 +42,7 @@ export default function SingleEvent({
           </div>
         </div>
         <EventAditionalInfo text={aditional_info} />
-        <EventLocation />
+        {/* <EventLocation /> */}
       </div>
     </div>
   )
