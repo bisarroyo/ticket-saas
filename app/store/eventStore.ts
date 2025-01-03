@@ -44,7 +44,7 @@ export const eventStore = create<EventState>((set) => ({
     if (error) {
       set({ error, loading: false })
     } else {
-      set({ data: data || [], loading: false })
+      set({ data: data, loading: false })
     }
   }
 }))
