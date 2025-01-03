@@ -59,11 +59,7 @@ export default function Event() {
           name={event.name}
           url={event.event_image}
           date={event.date}
-          location={
-            event.locations.length > 0
-              ? event.locations.map((loc) => loc.name).join(', ') // Combinar los nombres de ubicaciones
-              : 'No location available'
-          }
+          location={event?.locations[0]?.name}
           description={event.description}
           aditional_info={event.aditional_info}
         />

@@ -11,7 +11,6 @@ interface Event {
   event_image: string
   aditional_info?: string
   locations: {
-    id: string
     name: string
   }[]
 }
@@ -38,7 +37,7 @@ export const eventStore = create<EventState>((set) => ({
     const { data, error } = await supabase
       .from('events') // Tipar explícitamente la tabla como Event
       .select(
-        'name, description, id, date, event_image, aditional_info, locations(id, name)'
+        'name, description, id, date, event_image, aditional_info, locations(name)'
       )
 
     if (error) {

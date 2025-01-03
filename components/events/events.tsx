@@ -22,7 +22,7 @@ export default function Events() {
             {events?.map((event) => (
               <CardEvent
                 key={event.id}
-                location={event.locations[0].name}
+                location={event.locations[0]?.name}
                 name={event.name}
                 url={`/event/${event.id}`}
                 date={format(event.date, { date: 'long' }, 'es')}
