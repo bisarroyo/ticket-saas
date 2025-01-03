@@ -1,7 +1,7 @@
 interface InputProps extends React.HTMLProps<HTMLButtonElement> {
   text: string
-  textLoading: string
-  isPending: boolean
+  textLoading?: string
+  isPending?: boolean
   type?: 'submit' | 'reset' | 'button'
 }
 
