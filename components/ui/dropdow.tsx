@@ -9,19 +9,22 @@ import { AnimatePresence, motion } from 'motion/react'
 interface DropdownItemProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: React.ReactNode
   children: React.ReactNode
+  onclick?: () => void
 }
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({
   icon,
   children,
-  className
+  className,
+  onClick
 }) => {
   return (
     <div
       className={cn(
-        'w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 border-b transition-colors duration-200',
+        'w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 border-b transition-colors duration-200',
         className
       )}
+      onClick={onClick}
     >
       {icon}
       {children}

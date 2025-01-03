@@ -1,17 +1,20 @@
 'use client'
 import { createClient } from '@/utils/supabase/client'
-import { signOutAction } from '@/app/actions/authActions'
 import Logo from '@/components/ui/logo'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { User as UserProps } from '@supabase/supabase-js'
 import { Dropdown, DropdownItem } from '@/components/ui/dropdow'
 import { LogOut, Tickets, User } from 'lucide-react'
 
 export default function Header() {
   const supabase = createClient()
 
-  const [user, setUser] = useState<UserProps>()
+  const [user, setUser] = useState<string | null>()
+
+  const logout = async () => {
+    await supabase.auth.signOut()
+    setUser(null)
+  }
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -19,7 +22,7 @@ export default function Header() {
         data: { user }
       } = await supabase.auth.getUser()
 
-      if (user) setUser(user)
+      if (user) setUser(user.user_metadata.name)
     }
 
     fetchUser()
@@ -45,7 +48,7 @@ export default function Header() {
           <div className=''>
             {user ? (
               <div>
-                <Dropdown text={user?.user_metadata.name}>
+                <Dropdown text={user}>
                   <Link href='/profile'>
                     <DropdownItem icon={<User />}>
                       <p>Perfil</p>
@@ -59,12 +62,9 @@ export default function Header() {
                   <DropdownItem
                     icon={<LogOut />}
                     className='text-red-500 hover:bg-red-100'
+                    onClick={logout}
                   >
-                    <form action={signOutAction} className='w-full h-full'>
-                      <button type='submit' className='flex items-center gap-2'>
-                        Cerrar sesión
-                      </button>
-                    </form>
+                    <p>Cerrar sesión</p>
                   </DropdownItem>
                 </Dropdown>
               </div>
