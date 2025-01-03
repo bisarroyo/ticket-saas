@@ -1,17 +1,35 @@
-// import { createClient } from '@/utils/supabase/server'
-// import { signOutAction } from '@/app/actions/authActions'
+'use client'
+import { createClient } from '@/utils/supabase/client'
+import { signOutAction } from '@/app/actions/authActions'
 import Logo from '@/components/ui/logo'
 import Link from 'next/link'
-// import UserDropdown from './ui/user-dropdown'
+import { useEffect, useState } from 'react'
+import { User as UserProps } from '@supabase/supabase-js'
+import { Dropdown, DropdownItem } from '@/components/ui/dropdow'
+import { LogOut, Tickets, User } from 'lucide-react'
 
-export default async function Header() {
-  // const supabase = await createClient()
-  // const { data: user } = await supabase.auth.getUser()
+export default function Header() {
+  const supabase = createClient()
+
+  const [user, setUser] = useState<UserProps>()
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user }
+      } = await supabase.auth.getUser()
+      console.log(user)
+
+      if (user) setUser(user)
+    }
+
+    fetchUser()
+  }, [supabase.auth])
   return (
     <>
-      <header className='md:sticky top-0 left-0 right-0 h-auto bg-white/70 backdrop-blur-xl backdrop-saturate-200 dark:bg-black/70 dark:backdrop-saturate-200 border-b-1 z-10'>
+      <header className='md:sticky top-0 left-0 right-0 h-auto bg-white/70 backdrop-blur-xl backdrop-saturate-200  border-b-1 z-10'>
         <div className='container h-auto md:h-[100px] w-full py-4 gap-4 flex justify-evenly md:justify-between items-center flex-row flex-wrap md:flex-nowrap'>
-          <div className='order-1 md:order-none '>
+          <div className=''>
             <Link
               color='foreground'
               href='/'
@@ -25,20 +43,35 @@ export default async function Header() {
               </p>
             </Link>
           </div>
-          {/* <div className='order-3 md:order-none w-full md:w-auto '>
-            <Search />
-          </div> */}
-          <div className='order-2 md:order-none '>
-            {/* {user.user ? (
-              <UserDropdown
-                email={user.user?.email}
-                name={user.user?.user_metadata.full_name}
-                signOutAction={signOutAction}
-              />
+          <div className=''>
+            {user ? (
+              <div>
+                <Dropdown text={user?.user_metadata.name}>
+                  <Link href='/profile'>
+                    <DropdownItem icon={<User />}>
+                      <p>Perfil</p>
+                    </DropdownItem>
+                  </Link>
+                  <Link href='/profile'>
+                    <DropdownItem icon={<Tickets />}>
+                      <p>Tickets</p>
+                    </DropdownItem>
+                  </Link>
+                  <DropdownItem
+                    icon={<LogOut />}
+                    className='text-red-500 hover:bg-red-100'
+                  >
+                    <form action={signOutAction} className='w-full h-full'>
+                      <button type='submit' className='flex items-center gap-2'>
+                        Cerrar sesión
+                      </button>
+                    </form>
+                  </DropdownItem>
+                </Dropdown>
+              </div>
             ) : (
-              <Link href='/sign-in'>Iniciar Sesión</Link>
-            )} */}
-            <Link href='/login'>Iniciar Sesión</Link>
+              <Link href='/login'>Iniciar Sesión</Link>
+            )}
           </div>
         </div>
       </header>
