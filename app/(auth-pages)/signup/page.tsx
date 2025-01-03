@@ -29,7 +29,7 @@ export default function Page() {
 
   return (
     <section className='container'>
-      <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full lg:max-w-[660px]'>
+      <div className='flex flex-col items-start justify-center min-h-fit py-5 w-full lg:max-w-[660px]'>
         <h1 className='text-3xl'>Registrarme</h1>
         <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
         <AuthButtonGoogle

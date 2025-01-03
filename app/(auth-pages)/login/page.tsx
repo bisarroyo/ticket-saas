@@ -27,7 +27,7 @@ export default function Page() {
 
   return (
     <section className='container'>
-      <div className='flex flex-col items-start justify-center min-h-fit py-32 w-full md:max-w-[330px]'>
+      <div className='flex flex-col items-start justify-center min-h-fit py-5 w-full md:max-w-[330px]'>
         <h1 className='text-3xl'>Iniciar Sesión</h1>
         <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
         <AuthButtonGoogle
