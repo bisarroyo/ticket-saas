@@ -12,7 +12,7 @@ export default function Event() {
   const params = useParams()
   const { id } = params
 
-  const { getById, data, loading, error } = eventStore()
+  const { getById, loading, error } = eventStore()
 
   // Mostrar el componente de carga si aún no se han cargado los datos
   if (loading) {
@@ -25,7 +25,6 @@ export default function Event() {
 
   // Manejar errores o casos donde no se encuentre el evento
   const event = id ? getById(id.toString()) : null
-  console.log(data)
   if (error || !id || !event) {
     return (
       <div className='container'>
