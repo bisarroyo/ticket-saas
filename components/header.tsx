@@ -29,7 +29,7 @@ export default function Header() {
   }, [supabase.auth])
   return (
     <>
-      <header className='md:sticky top-0 left-0 right-0 h-auto bg-white/70 backdrop-blur-xl backdrop-saturate-200  border-b-1 z-10'>
+      <header className='md:sticky top-0 left-0 right-0 h-auto bg-background/90 backdrop-blur-xl backdrop-saturate-200  border-b-1 z-10'>
         <div className='container h-auto md:h-[100px] w-full py-4 gap-4 flex justify-evenly md:justify-between items-center flex-row flex-wrap md:flex-nowrap'>
           <div className=''>
             <Link
