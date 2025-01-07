@@ -7,21 +7,12 @@ import Loading from '@/components/ui/loading'
 
 // Zustand store
 import { eventStore } from '@/app/store/eventStore'
-import { useEffect } from 'react'
 
 export default function Event() {
   const params = useParams()
   const { id } = params
 
-  const { fetchById, getById, data, loading, error } = eventStore()
-
-  useEffect(() => {
-    // Verificar si el evento ya está en el store
-    const event = id ? getById(id.toString()) : null
-    if (!event && id) {
-      fetchById(id.toString())
-    }
-  }, [fetchById, getById, id])
+  const { getById, data, loading, error } = eventStore()
 
   // Mostrar el componente de carga si aún no se han cargado los datos
   if (loading) {
