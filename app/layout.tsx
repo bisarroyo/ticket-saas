@@ -3,9 +3,6 @@ import { Geist, Geist_Mono } from 'next/font/google'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-// eventcontext
-// import EventProvider from '@/app/context/eventprovider'
-
 // import Header from '@/components/header'
 import './globals.css'
 
