@@ -31,7 +31,7 @@ const supabase = createClient()
 // Crea la tienda Zustand
 export const eventStore = create<EventState>((set, get) => ({
   data: [],
-  loading: false,
+  loading: true,
   error: null,
 
   fetchData: async () => {
