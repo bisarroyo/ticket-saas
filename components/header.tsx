@@ -66,10 +66,10 @@ export default function Header() {
             {user && (
               <>
                 <Link
-                  href='/ticket'
+                  href='/tickets'
                   className={cn(
                     'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
-                    activeLink('/ticket') && 'text-primary'
+                    activeLink('/tickets') && 'text-primary'
                   )}
                 >
                   <Ticket className='h-8 w-8 md:h-5 md:w-5' />
