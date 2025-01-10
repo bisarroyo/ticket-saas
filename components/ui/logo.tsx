@@ -1,4 +1,9 @@
-export default function Logo({ width = '50', height = '50' }) {
+type Props = {
+  width?: string
+  height?: string
+}
+
+export default function Logo({ width = '50', height = '50' }: Props) {
   return (
     <svg
       version='1.1'

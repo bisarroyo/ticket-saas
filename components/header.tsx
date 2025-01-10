@@ -73,7 +73,7 @@ export default function Header() {
                   )}
                 >
                   <Ticket className='h-8 w-8 md:h-5 md:w-5' />
-                  <span className='hidden md:block'>Mis tickets</span>
+                  <span className='hidden md:block'>Mis Eventos</span>
                 </Link>
               </>
             )}
