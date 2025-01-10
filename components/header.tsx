@@ -4,16 +4,22 @@ import Logo from '@/components/ui/logo'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Dropdown, DropdownItem } from '@/components/ui/dropdow'
-import { LogOut, Tickets, User } from 'lucide-react'
+import { LogOut, PartyPopper, Settings, Ticket, User } from 'lucide-react'
+import { useRouter, usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 export default function Header() {
   const supabase = createClient()
+  const router = useRouter()
+  const pathname = usePathname()
+  console.log(pathname)
 
   const [user, setUser] = useState<string | null>()
 
   const logout = async () => {
     await supabase.auth.signOut()
     setUser(null)
+    router.push('/login')
   }
 
   useEffect(() => {
@@ -27,40 +33,59 @@ export default function Header() {
 
     fetchUser()
   }, [supabase.auth])
+
+  const activeLink = (path: string) => {
+    return path === pathname
+  }
   return (
     <>
       <header className='md:sticky top-0 left-0 right-0 h-auto bg-background/90 backdrop-blur-xl backdrop-saturate-200  border-b-1 z-10'>
         <div className='container h-auto md:h-[100px] w-full py-4 gap-4 flex justify-evenly md:justify-between items-center flex-row flex-wrap md:flex-nowrap'>
           <div className=''>
-            <Link
-              color='foreground'
-              href='/'
-              className='flex justify-center items-center'
-            >
-              <Logo />
-              <p className='text-xl pl-2 md:block hidden'>
-                Plus
-                <br />
-                Eventos
-              </p>
+            <Link href='/' className='flex justify-center items-center'>
+              <Logo height='40' width='40' />
             </Link>
+          </div>
+          <div className='flex justify-center items-center gap-4'>
+            <Link
+              href='/'
+              className={cn(
+                'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                activeLink('/') && 'text-primary opacity-100'
+              )}
+            >
+              <PartyPopper size={20} />
+              <span>Explorar</span>
+            </Link>
+            {user && (
+              <Link
+                href='/ticket'
+                className={cn(
+                  'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                  activeLink('/ticket') && 'text-primary'
+                )}
+              >
+                <Ticket size={20} />
+                <span>Mis tickets</span>
+              </Link>
+            )}
           </div>
           <div className=''>
             {user ? (
               <div>
-                <Dropdown text={user}>
-                  <Link href='/profile'>
-                    <DropdownItem icon={<User />}>
-                      <p>Perfil</p>
+                <Dropdown text={user} icon={<User />}>
+                  <Link href='/user'>
+                    <DropdownItem icon={<User size={20} />}>
+                      <p>Mi perfil</p>
                     </DropdownItem>
                   </Link>
-                  <Link href='/profile'>
-                    <DropdownItem icon={<Tickets />}>
-                      <p>Tickets</p>
+                  <Link href='/user/settings'>
+                    <DropdownItem icon={<Settings size={20} />}>
+                      <p>Ajustes</p>
                     </DropdownItem>
                   </Link>
                   <DropdownItem
-                    icon={<LogOut />}
+                    icon={<LogOut size={20} />}
                     className='text-red-500 hover:bg-red-100'
                     onClick={logout}
                   >

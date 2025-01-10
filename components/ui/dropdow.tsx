@@ -1,7 +1,6 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { ChevronDown } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { AnimatePresence, motion } from 'motion/react'
@@ -33,13 +32,15 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
 }
 
 interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
-  text: string
+  text?: string
+  icon?: React.ReactNode
   children: React.ReactNode
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   text,
   children,
+  icon,
   className
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -69,10 +70,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
       {/* Botón del Dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='inline-flex w-full justify-center items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-md font-medium text-gray-700 shadow-sm hover:bg-gray-50'
+        className='inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-md font-medium text-gray-700 shadow-sm hover:bg-gray-50'
       >
         <p>{text}</p>
-        <ChevronDown />
+        {icon}
       </button>
 
       {/* Dropdown con animaciones */}
@@ -90,6 +91,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
             role='menu'
             aria-orientation='vertical'
             aria-labelledby='menu-button'
+            onClick={() => {
+              setIsOpen(!isOpen)
+            }}
           >
             {children}
           </motion.div>
