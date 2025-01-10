@@ -13,6 +13,9 @@
   --muted-foreground: #6b7280;
   --danger: #f44336;
   --danger-foreground: #fff;
+
+  --font: -apple-system, BlinkMacSystemFont, 'Apple Color Emoji', Inter, Roboto,
+    Segoe UI, Helvetica Neue, Arial, Noto Sans, sans-serif;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -25,7 +28,17 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font);
+}
+
+h1 {
+  @apply text-3xl font-bold;
+}
+h2 {
+  @apply text-2xl font-bold;
+}
+h3 {
+  @apply text-xl font-bold;
 }
 
 .loader,
