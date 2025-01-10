@@ -4,7 +4,14 @@ import Logo from '@/components/ui/logo'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Dropdown, DropdownItem } from '@/components/ui/dropdow'
-import { LogOut, PartyPopper, Settings, Ticket, User } from 'lucide-react'
+import {
+  CalendarPlus,
+  LogOut,
+  PartyPopper,
+  Settings,
+  Ticket,
+  User
+} from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
@@ -53,25 +60,27 @@ export default function Header() {
                 activeLink('/') && 'text-primary opacity-100'
               )}
             >
-              <PartyPopper size={20} />
-              <span>Explorar</span>
+              <PartyPopper className='h-8 w-8 md:h-5 md:w-5' />
+              <span className='hidden md:block'>Explorar</span>
             </Link>
             {user && (
-              <Link
-                href='/ticket'
-                className={cn(
-                  'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
-                  activeLink('/ticket') && 'text-primary'
-                )}
-              >
-                <Ticket size={20} />
-                <span>Mis tickets</span>
-              </Link>
+              <>
+                <Link
+                  href='/ticket'
+                  className={cn(
+                    'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                    activeLink('/ticket') && 'text-primary'
+                  )}
+                >
+                  <Ticket className='h-8 w-8 md:h-5 md:w-5' />
+                  <span className='hidden md:block'>Mis tickets</span>
+                </Link>
+              </>
             )}
           </div>
           <div className=''>
             {user ? (
-              <div>
+              <div className='flex-'>
                 <Dropdown text={user} icon={<User />}>
                   <Link href='/user'>
                     <DropdownItem icon={<User size={20} />}>
@@ -81,6 +90,11 @@ export default function Header() {
                   <Link href='/user/settings'>
                     <DropdownItem icon={<Settings size={20} />}>
                       <p>Ajustes</p>
+                    </DropdownItem>
+                  </Link>
+                  <Link href='/user/settings'>
+                    <DropdownItem icon={<CalendarPlus size={20} />}>
+                      <p>Crear Evento</p>
                     </DropdownItem>
                   </Link>
                   <DropdownItem
