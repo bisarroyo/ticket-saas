@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
 export default function useTickets() {
-  const [data, setData] = useState<Any[]>()
+  const [data, setData] = useState()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
 
