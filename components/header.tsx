@@ -12,7 +12,6 @@ export default function Header() {
   const supabase = createClient()
   const router = useRouter()
   const pathname = usePathname()
-  console.log(pathname)
 
   const [user, setUser] = useState<string | null>()
 
