@@ -36,7 +36,7 @@ export default function Tickets() {
         </div>
       ) : (
         <div className='grid grid-cols-1 gap-4 max-w-2xl w-full'>
-          {data?.map((ticket: any) => (
+          {data?.map((ticket) => (
             <CardTicket
               key={ticket.id}
               eventName={ticket.events.name}
