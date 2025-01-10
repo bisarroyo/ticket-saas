@@ -3,7 +3,7 @@ import TicketDetails from '@/components/tickets/ticket-details'
 import Loading from '@/components/ui/loading'
 // import useSingleTicket from '@/hooks/useSingleTicket'
 import { useParams } from 'next/navigation'
-export default function page() {
+export default function Page() {
   const params = useParams()
   const { id } = params
   const eventId = id?.toString() || '1'

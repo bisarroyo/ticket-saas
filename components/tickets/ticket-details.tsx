@@ -28,18 +28,18 @@ export default function TicketDetails({
       <TicketHeader />
       <TicketHero
         image='https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'
-        id='123456789'
-        name='Ticket name'
-        eventDate='2023-01-01'
-        eventLocation='Madrid'
-        isValid={true}
+        id={id}
+        name={name}
+        eventDate={eventDate}
+        eventLocation={eventLocation}
+        isValid={isValid}
       />
       <TicketBody
-        id='123456789'
-        ticketPrice={100}
-        purshasedDate='2023-01-01'
-        ticketHolderName='Ticket holder name'
-        ticketHolderEmail='ticketholder@email.com'
+        id={id}
+        ticketPrice={ticketPrice}
+        purshasedDate={purshasedDate}
+        ticketHolderName={ticketHolderName}
+        ticketHolderEmail={ticketHolderEmail}
       />
     </div>
   )
