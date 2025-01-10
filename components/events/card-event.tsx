@@ -23,7 +23,7 @@ export default function CardEvent({
   return (
     <Link href={url}>
       <div className='border rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out'>
-        <div className='aspect-[16/7]'>
+        <div className='aspect-[16/7] rounded-2xl overflow-hidden'>
           <Image
             src={image}
             width={500}
@@ -33,7 +33,7 @@ export default function CardEvent({
           />
         </div>
         <div className='p-4'>
-          <h3 className='text-2xl font-bold mb-4'>{name}</h3>
+          <h3 className='text-2xl font-bold'>{name}</h3>
           <div className='flex items-center gap-2'>
             <MapPin size={16} />
             <p className='text-md'>{location}</p>
