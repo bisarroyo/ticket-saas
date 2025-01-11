@@ -12,6 +12,5 @@ declare global {
 
   interface TicketSoldWithLocationType extends Omit<TicketSold, 'event_id'> {
     events: EventsWithLocation
-    user: 
   }
 }
