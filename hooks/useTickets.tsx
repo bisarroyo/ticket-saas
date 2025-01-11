@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
 export default function useTickets() {
-  const [data, setData] = useState()
+  const [data, setData] = useState<TicketSoldWithLocationType[]>()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
 
@@ -23,6 +23,7 @@ export default function useTickets() {
           'id, created_at, status, events(id, name, event_image, date, starts_at, locations(id, name))'
         )
         .eq('is_active', true)
+        .returns<TicketSoldWithLocationType[]>()
       if (queryError) {
         setError('Error al realizar la consulta')
         console.log(queryError)

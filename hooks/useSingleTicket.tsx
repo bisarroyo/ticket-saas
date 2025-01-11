@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { PostgrestError } from '@supabase/supabase-js'
 
 export default function useSingleTicket(id: string) {
   const [data, setData] = useState<any>(null)
-  const [error, setError] = useState<any>(null)
+  const [error, setError] = useState<PostgrestError | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
@@ -13,7 +14,7 @@ export default function useSingleTicket(id: string) {
       const { data, error } = await supabase
         .from('tickets_sold')
         .select(
-          'id,auth.users(*), events(id,name,date,location_id(id,name)), status, created_at, payment_id(ammount)'
+          'id, status, created_at,user_id(name, email), event_id(id,name,date,locations(id,name)),  payment_id(ammount)'
         )
         .eq('id', id)
         .is('is_active', true)
@@ -27,7 +28,7 @@ export default function useSingleTicket(id: string) {
     }
 
     fetchTickets()
-  }, [id]) // Este array vacío asegura que solo se ejecute una vez al montar el componente
+  }, [id])
 
   return { data, error, loading }
 }
