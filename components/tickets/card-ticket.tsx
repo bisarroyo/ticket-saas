@@ -12,14 +12,6 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type status =
-  | 'valid'
-  | 'invalid'
-  | 'canceled'
-  | 'redeemed'
-  | 'pending'
-  | 'refunded'
-
 const statusSelector = {
   valid: {
     icon: <CircleCheck />,
@@ -61,20 +53,24 @@ export default function CardTicket({
   ticketId
 }: {
   eventName: string
-  status: status
+  status: TicketSoldType['status']
   eventDate: string
-  eventLocation: string
+  eventLocation: string | null
   ticketId: string
 }) {
+  console.log(status)
   return (
     <Link href='/dashboard/tickets/[id]' as={`/tickets/${ticketId}`}>
       <div className='border border-foreground rounded-2xl overflow-hidden border-dashed hover:border-primary transition-border duration-300 ease-in'>
         <div className='flex justify-between items-center p-4 '>
           <p>{eventName}</p>
           <p
-            className={cn('flex items-center gap-1', statusSelector[status].bg)}
+            className={cn(
+              'flex items-center gap-1',
+              statusSelector[status!].bg
+            )}
           >
-            {statusSelector[status].text} {statusSelector[status].icon}
+            {statusSelector[status!].text} {statusSelector[status!].icon}
           </p>
         </div>
         <div className='px-4 pb-4'>
