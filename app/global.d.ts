@@ -5,12 +5,23 @@ declare global {
   type EventsType = DB['public']['Tables']['events']['Row']
   type LocationsType = DB['public']['Tables']['locations']['Row']
   type TicketSoldType = DB['public']['Tables']['tickets_sold']['Row']
+  type UsersType = DB['public']['Tables']['user_profiles']['Row']
+  type PaymentsType = DB['public']['Tables']['payments']['Row']
 
   interface EventsWithLocationType extends Omit<Events, 'location_id'> {
-    locations: Locations
+    locations: Locations[]
   }
 
   interface TicketSoldWithLocationType extends Omit<TicketSold, 'event_id'> {
     events: EventsWithLocation
+  }
+  interface singleTicketSoldType
+    extends Omit<TicketSold, 'event_id' | 'user_id' | 'payment_id'> {
+    event_id: EventsWithLocation
+    user_id: {
+      name: string | null
+      email: string | null
+    }
+    payment_id: PaymentsType
   }
 }
