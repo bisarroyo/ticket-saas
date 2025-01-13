@@ -8,7 +8,6 @@ export default function TicketHero({
   eventLocation,
   isValid
 }: {
-  image: string
   id: string
   name: string
   eventDate: string
