@@ -10,8 +10,8 @@ export default function TicketBody({
   id: string
   ticketPrice: number
   purshasedDate: string
-  ticketHolderName: string
-  ticketHolderEmail: string
+  ticketHolderName: string | null
+  ticketHolderEmail: string | null
 }) {
   return (
     <div className='p-5 w-full h-auto bg-white border border-dashed rounded-xl'>

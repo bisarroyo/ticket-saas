@@ -20,8 +20,8 @@ export default function TicketDetails({
   isValid: boolean
   ticketPrice: number
   purshasedDate: string
-  ticketHolderName: string
-  ticketHolderEmail: string
+  ticketHolderName: string | null
+  ticketHolderEmail: string | null
 }) {
   return (
     <div className='max-w-2xl w-full h-auto '>
