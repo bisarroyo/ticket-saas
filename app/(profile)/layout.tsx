@@ -3,5 +3,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <section className='mb-5 min-h-screen'>{children}</section>
+  return <section className='mb-5'>{children}</section>
 }
