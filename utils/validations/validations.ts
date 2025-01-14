@@ -40,13 +40,10 @@ export const resetSchema = z.object({
 })
 
 export const updateSchema = z.object({
-  fullName: z.string().min(3, {
+  full_name: z.string().min(3, {
     message: 'El nombre debe ser mayor a 3 caracteres.'
   }),
   email: z.string().email({
     message: 'Debe ingresar una dirección de correo electrónico válida.'
   })
-  // password: z.string().min(8, {
-  //   message: 'La contraseña debe tener al menos 8 caracteres.'
-  // })
 })
