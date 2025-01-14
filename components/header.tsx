@@ -82,17 +82,17 @@ export default function Header() {
             {user ? (
               <div className='flex-'>
                 <Dropdown text={user} icon={<User />}>
-                  <Link href='/user'>
+                  <Link href='/profile'>
                     <DropdownItem icon={<User size={20} />}>
                       <p>Mi perfil</p>
                     </DropdownItem>
                   </Link>
-                  <Link href='/user/settings'>
+                  <Link href='/profile/settings'>
                     <DropdownItem icon={<Settings size={20} />}>
                       <p>Ajustes</p>
                     </DropdownItem>
                   </Link>
-                  <Link href='/user/settings'>
+                  <Link href='/create'>
                     <DropdownItem icon={<CalendarPlus size={20} />}>
                       <p>Crear Evento</p>
                     </DropdownItem>
