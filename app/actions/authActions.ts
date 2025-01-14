@@ -9,8 +9,9 @@ import {
   loginSchema,
   signupSchema,
   forgotSchema,
-  resetSchema
-} from '@/utils/validations/auth-validations'
+  resetSchema,
+  updateSchema
+} from '@/utils/validations/validations'
 import { headers } from 'next/headers'
 
 type FormState = {
@@ -244,4 +245,53 @@ export const signOutAction = async () => {
   const supabase = await createClient()
   await supabase.auth.signOut()
   return redirect('/login')
+}
+
+export async function updateUser(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const supabase = await createClient()
+
+  const data = {
+    fullName: formData.get('fullName') as string,
+    email: formData.get('email') as string
+    // password: formData.get('password') as string
+  }
+
+  const validation = updateSchema.safeParse(data)
+
+  if (!validation.success) {
+    const errors = validation.error.errors.map((error) => ({
+      type: error.path[0] as string,
+      message: error.message
+    }))
+    console.log(errors)
+    return {
+      success: false,
+      error: errors,
+      inputs: data
+    }
+  }
+
+  const { error } = await supabase.auth.updateUser({
+    data: {
+      full_name: data.fullName
+    },
+    email: data.email
+    // password: data.password
+  })
+
+  if (error) {
+    return {
+      success: false,
+      error: [{ type: 'email', message: 'No se pudo actualizar el usuario.' }],
+      inputs: data
+    }
+  }
+  return {
+    success: true,
+    error: [],
+    inputs: data
+  }
 }
