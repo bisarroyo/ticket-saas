@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className='flex justify-center items-center py-5'>
+    <div className='flex justify-center items-center '>
       <span className='loader'></span>
     </div>
   )
