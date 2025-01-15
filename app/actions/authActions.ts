@@ -237,8 +237,11 @@ export async function resetPassword(
     }
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  return {
+    success: true,
+    error: [],
+    inputs: data
+  }
 }
 
 export const signOutAction = async () => {
