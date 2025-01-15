@@ -24,7 +24,7 @@ const Page = () => {
         <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
         <form
           action={formAction}
-          className='flex flex-col items-start justify-center w-full'
+          className='flex flex-col items-center justify-center gap-4 w-full'
         >
           <Input
             label='Correo electrónico:'
@@ -49,6 +49,7 @@ const Page = () => {
             textLoading='Enviando...'
             isPending={isPending}
             type='submit'
+            className='w-full'
           />
         </form>
         {state?.success && (

@@ -24,7 +24,7 @@ const Page = () => {
         <p className='mb-4'>Ingresa tu nueva contraseña</p>
         <form
           action={formAction}
-          className='flex flex-col items-start justify-center w-full'
+          className='flex flex-col items-center justify-center gap-4 w-full'
         >
           <InputPassword
             label='Contraseña:'
@@ -49,6 +49,7 @@ const Page = () => {
             textLoading='Actualizando...'
             isPending={isPending}
             type='submit'
+            className='w-full'
           />
         </form>
       </div>

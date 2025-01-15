@@ -43,7 +43,7 @@ export default function Page() {
         </div>
         <form
           action={formAction}
-          className='flex flex-col items-start justify-center w-full gap-4'
+          className='flex flex-col items-center justify-center w-full gap-4'
         >
           <Input
             label='Email:'
@@ -82,6 +82,7 @@ export default function Page() {
             textLoading='Iniciando sesión...'
             isPending={isPending}
             type='submit'
+            className='w-full'
           />
         </form>
         <p className='text-center w-full mt-3 flex items-center justify-center gap-2'>

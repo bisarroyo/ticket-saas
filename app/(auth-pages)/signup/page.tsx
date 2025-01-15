@@ -45,7 +45,7 @@ export default function Page() {
         </div>
         <form
           action={formAction}
-          className='flex flex-col items-start justify-center w-full'
+          className='flex flex-col items-center justify-center gap-4 w-full'
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full'>
             <Input
@@ -108,6 +108,7 @@ export default function Page() {
             textLoading='Registrando...'
             isPending={isPending}
             type='submit'
+            className='w-full'
           />
         </form>
         <p className='text-center w-full mt-3 flex items-center justify-center gap-2'>
