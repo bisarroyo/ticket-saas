@@ -21,7 +21,7 @@ const Page = () => {
     <section className='container'>
       <div className='flex flex-col items-start justify-center min-h-fit py-5 w-full md:max-w-[330px]'>
         <h1 className='text-3xl'>Actualizar contraseña</h1>
-        <p className='mb-4'>Hola, Bienvenido a Plus Eventos</p>
+        <p className='mb-4'>Ingresa tu nueva contraseña</p>
         <form
           action={formAction}
           className='flex flex-col items-start justify-center w-full'
