@@ -2,6 +2,8 @@
 import useUser from '@/hooks/useUser'
 import Loading from '@/components/ui/loading'
 import UserForm from '@/components/profile/user-form'
+import App from '@/components/modal'
+import PasswordResetForm from '@/components/auth/reset-password'
 
 export default function Page() {
   const { data, loading } = useUser()
@@ -20,7 +22,9 @@ export default function Page() {
           <div className='p-5 border rounded-lg'>
             <h2 className=''>Seguridad</h2>
             <p>Actualiza tus opciones de seguridad</p>
-            <UserForm user={data} />
+            <App buttonText='Cambiar contraseña'>
+              <PasswordResetForm />
+            </App>
           </div>
         </div>
       )}
