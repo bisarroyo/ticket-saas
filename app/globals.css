@@ -6,13 +6,15 @@
   --background: #f7fafc;
   --foreground: #171717;
   --primary: #003c8d;
-  --primary-foreground: #3d29ae;
+  --primary-foreground: #fff;
   --secondary: 0 0% 96.1%;
   --secondary-foreground: 0 0% 9%;
   --muted: #535353;
   --muted-foreground: #6b7280;
   --danger: #f44336;
   --danger-foreground: #fff;
+  --available: #16a34a;
+  --available-foreground: #fff;
 
   --font: -apple-system, BlinkMacSystemFont, 'Apple Color Emoji', Inter, Roboto,
     Segoe UI, Helvetica Neue, Arial, Noto Sans, sans-serif;

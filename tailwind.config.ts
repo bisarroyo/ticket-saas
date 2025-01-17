@@ -30,6 +30,10 @@ export default {
         danger: {
           DEFAULT: 'var(--danger)',
           foreground: 'var(--danger-foreground)'
+        },
+        available: {
+          DEFAULT: 'var(--available)',
+          foreground: 'var(--available-foreground)'
         }
       }
     }
