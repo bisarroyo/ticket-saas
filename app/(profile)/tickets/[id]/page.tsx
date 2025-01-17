@@ -23,7 +23,7 @@ export default function Page() {
   const ticketInfo = ticket[0]
 
   return (
-    <div className='flex justify-center items-center py-5 '>
+    <div className='container flex justify-center items-center py-5 '>
       <TicketDetails
         id={ticketInfo.id}
         name={ticketInfo.event_id.name}
