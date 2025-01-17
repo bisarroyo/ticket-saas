@@ -87,7 +87,7 @@ export const Modal = ({
   )
 }
 
-const App = ({
+const AppModal = ({
   children,
   buttonText
 }: {
@@ -110,4 +110,4 @@ const App = ({
   )
 }
 
-export default App
+export default AppModal
