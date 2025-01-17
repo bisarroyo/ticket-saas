@@ -1,39 +1,39 @@
-// import {
-//   Table,
-//   TableBody,
-//   TableCaption,
-//   TableCell,
-//   TableHead,
-//   TableHeader,
-//   TableRow
-// } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
 
 // type Props = {
 //   location: string
 //   price: number
 // }
 
-// const data = [
-//   {
-//     location: 'Sol',
-//     price: 100
-//   },
-//   {
-//     location: 'Palco',
-//     price: 200
-//   },
-//   {
-//     location: 'Sombra',
-//     price: 300
-//   }
-// ]
+const data = [
+  {
+    location: 'Sol',
+    price: 100
+  },
+  {
+    location: 'Palco',
+    price: 200
+  },
+  {
+    location: 'Sombra',
+    price: 300
+  }
+]
 
 export default function EventPrices() {
   return (
     <div className='w-full'>
       <h3 className='text-2xl font-bold mb-4'>Precios</h3>
       <div className='border p-2 md:p-4 rounded-lg '>
-        {/* <Table>
+        <Table>
           <TableCaption>Lista de precios.</TableCaption>
           <TableHeader>
             <TableRow>
@@ -51,7 +51,7 @@ export default function EventPrices() {
               </TableRow>
             ))}
           </TableBody>
-        </Table> */}
+        </Table>
       </div>
     </div>
   )
