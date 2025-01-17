@@ -13,16 +13,17 @@ import Button from '@/components/ui/button'
 // validation
 import { updateSchema } from '@/utils/validations/validations'
 import type { User } from '@supabase/supabase-js'
-import useUser from '@/hooks/useUser'
 
 interface FormInputs {
   full_name: string
   email: string
 }
 
-const UserForm: React.FC<{ user: User | undefined }> = ({ user }) => {
-  const { loading, updateUser } = useUser()
-
+const UserForm: React.FC<{
+  user: User | undefined
+  loading: boolean
+  updateUser: (full_name: string, email: string) => void
+}> = ({ user, loading, updateUser }) => {
   const {
     register,
     handleSubmit,
@@ -42,7 +43,7 @@ const UserForm: React.FC<{ user: User | undefined }> = ({ user }) => {
 
   return (
     <section>
-      <div className='flex flex-col items-center justify-center min-h-fit mt-5 w-full'>
+      <div className='flex flex-col items-center justify-center min-h-fit w-full'>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className='flex flex-col items-start justify-center w-full gap-4'
