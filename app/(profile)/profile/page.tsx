@@ -1,20 +1,22 @@
 'use client'
 import useUser from '@/hooks/useUser'
 import Loading from '@/components/ui/loading'
-import UserForm from '@/components/profile/user-form'
+import { UserProfile } from '@/components/profile/profile'
 
 export default function Page() {
-  const { data, loading } = useUser()
+  const { data, error, loading } = useUser()
+
+  if (error) {
+    return <div>{error}</div>
+  }
 
   return (
-    <div className='max-w-xl mx-auto'>
+    <div className='container max-w-xl mx-auto'>
       {loading ? (
         <Loading />
       ) : (
-        <div className='p-4 border rounded-lg'>
-          <h2 className=''>Perfil</h2>
-          <p>Actualiza tu información persional</p>
-          <UserForm user={data} />
+        <div className=''>
+          <UserProfile user={data} />
         </div>
       )}
     </div>
