@@ -2,24 +2,22 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   title: string
-  text: string
-  bg: string
+  content?: string
   icon: React.ReactNode
 }
 
-export default function Badge({ title, text, bg, icon }: Props) {
+export default function Badge({ title, content, icon }: Props) {
   return (
     <div
       className={cn(
-        'flex flex-wrap flex-col items-center justify-center p-2 rounded-xl border ${bg}',
-        bg && bg
+        'grid grid-cols-[1fr_3fr] items-center gap-4 p-2 bg-white/30 backdrop-blur-md border border-white/20 rounded-lg shadow-lg w-80'
       )}
     >
-      <div className='flex items-center gap-2'>
-        {icon}
-        <p className='text-md text-slate-800'>{title}</p>
+      <div className='flex justify-end items-center'>{icon}</div>
+      <div className='flex flex-col items-start text-md text-slate-800'>
+        <p>{title}</p>
+        <p>{content}</p>
       </div>
-      <p>{text}</p>
     </div>
   )
 }
