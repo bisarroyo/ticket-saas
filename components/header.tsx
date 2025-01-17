@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react'
 import { Dropdown, DropdownItem } from '@/components/ui/dropdow'
 import {
   CalendarPlus,
+  Compass,
   LogOut,
-  PartyPopper,
   Settings,
-  Ticket,
+  Tickets,
   User
 } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
@@ -45,8 +45,8 @@ export default function Header() {
   }
   return (
     <>
-      <header className='md:sticky top-0 left-0 right-0 h-auto bg-background/90 backdrop-blur-xl backdrop-saturate-200  border-b-1 z-10'>
-        <div className='container h-auto md:h-[100px] w-full py-4 gap-4 flex justify-evenly md:justify-between items-center flex-row flex-wrap md:flex-nowrap'>
+      <header className='md:sticky top-0 left-0 right-0 h-auto bg-white/50 backdrop-blur-lg border-b-1 z-10'>
+        <div className='container h-auto md:h-[70px] w-full py-4 gap-4 flex justify-evenly md:justify-between items-center flex-row flex-wrap md:flex-nowrap'>
           <div className=''>
             <Link href='/' className='flex justify-center items-center'>
               <Logo height='40' width='40' />
@@ -56,11 +56,11 @@ export default function Header() {
             <Link
               href='/'
               className={cn(
-                'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                'hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
                 activeLink('/') && 'text-primary opacity-100'
               )}
             >
-              <PartyPopper className='h-8 w-8 md:h-5 md:w-5' />
+              <Compass className='h-8 w-8 md:h-5 md:w-5' />
               <span className='hidden md:block'>Explorar</span>
             </Link>
             {user && (
@@ -68,11 +68,11 @@ export default function Header() {
                 <Link
                   href='/tickets'
                   className={cn(
-                    'text-muted hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                    'hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
                     activeLink('/tickets') && 'text-primary'
                   )}
                 >
-                  <Ticket className='h-8 w-8 md:h-5 md:w-5' />
+                  <Tickets className='h-8 w-8 md:h-5 md:w-5' />
                   <span className='hidden md:block'>Mis Eventos</span>
                 </Link>
               </>
