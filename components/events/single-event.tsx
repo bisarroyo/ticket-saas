@@ -33,7 +33,7 @@ export default function SingleEvent({
             <EventDetails date={date} location={location} isAvailable={false} />
             <Link
               href={`/buy/${id}`}
-              className='bg-primary text-primary-foreground border-primary shadow-xl hover:bg-primary-foreground hover:text-primary text-md py-2 px-4 text-center border rounded-md focus:outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='bg-primary text-primary-foreground border-primary shadow-xl hover:bg-primary/50 text-md py-2 px-4 text-center border rounded-md w-full focus:outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
             >
               Comprar Entradas
             </Link>

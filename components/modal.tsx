@@ -89,16 +89,22 @@ export const Modal = ({
 
 const AppModal = ({
   children,
+  variant,
   buttonText
 }: {
   children: React.ReactNode
+  variant?: 'default' | 'danger'
   buttonText: string
 }) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
 
   return (
     <div className='App'>
-      <Button onClick={() => setModalOpen(true)} text={buttonText} />
+      <Button
+        onClick={() => setModalOpen(true)}
+        text={buttonText}
+        variant={variant}
+      />
       <Modal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}

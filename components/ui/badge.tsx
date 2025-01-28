@@ -10,7 +10,7 @@ export default function Badge({ title, content, icon }: Props) {
   return (
     <div
       className={cn(
-        'grid grid-cols-[1fr_3fr] items-center gap-4 p-2 bg-white/30 backdrop-blur-md border border-white/20 rounded-lg shadow-lg w-80'
+        'grid grid-cols-[1fr_3fr] items-center gap-4 p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg shadow-lg w-80'
       )}
     >
       <div className='flex justify-end items-center'>{icon}</div>

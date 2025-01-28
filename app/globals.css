@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7fafc;
+  --background: linear-gradient(
+    to left bottom,
+    rgb(202, 224, 253),
+    rgb(213, 167, 253)
+  );
   --foreground: #171717;
   --primary: #003c8d;
   --primary-foreground: #fff;

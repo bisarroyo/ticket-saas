@@ -22,7 +22,7 @@ export default function CardEvent({
 }: Props) {
   return (
     <Link href={url}>
-      <div className='border rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out'>
+      <div className='bg-white/20 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out'>
         <div className='aspect-[16/7] rounded-2xl overflow-hidden'>
           <Image
             src={image}

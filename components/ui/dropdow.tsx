@@ -70,7 +70,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       {/* Botón del Dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='inline-flex w-full justify-center items-center gap-2 rounded-full border border-gray-300 bg-white px-2 md:px-4 py-2 text-md font-medium text-gray-700 shadow-sm hover:bg-gray-50'
+        className='inline-flex w-full justify-center items-center gap-2 rounded-full border border-gray-300 bg-white/50 backdrop-blur-md px-2 md:px-4 py-2 text-md font-medium text-gray-700 shadow-sm'
       >
         <p className='hidden md:block'>{text}</p>
         {icon}
@@ -85,7 +85,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.1, ease: 'easeOut' }}
             className={cn(
-              'absolute right-0 z-10 mt-2 min-w-40 w-full origin-top-right rounded-md bg-white shadow-lg focus:outline-none overflow-hidden',
+              'absolute right-0 z-10 mt-2 min-w-40 w-full origin-top-right rounded-md shadow-lg focus:outline-none overflow-hidden bg-white/50 backdrop-blur-md',
               className
             )}
             role='menu'

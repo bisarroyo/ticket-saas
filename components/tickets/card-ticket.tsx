@@ -16,32 +16,32 @@ const statusSelector = {
   valid: {
     icon: <CircleCheck />,
     text: 'Válido',
-    bg: 'text-green-600 dark:text-green-300'
+    bg: 'text-available'
   },
   invalid: {
     icon: <CircleX />,
     text: 'Inválido',
-    bg: 'text-red-600 dark:text-red-300'
+    bg: 'text-red-600'
   },
   canceled: {
     icon: <CircleX />,
     text: 'Cancelado',
-    bg: 'text-red-600 dark:text-red-300'
+    bg: 'text-red-600'
   },
   redeemed: {
     icon: <Info />,
     text: 'Canjeado',
-    bg: 'text-green-600 dark:text-green-300'
+    bg: 'text-available'
   },
   pending: {
     icon: <Info />,
     text: 'Pendiente',
-    bg: 'text-yellow-600 dark:text-yellow-300'
+    bg: 'text-yellow-600'
   },
   refunded: {
     icon: <CircleAlert />,
     text: 'Reembolsado',
-    bg: 'text-red-600 dark:text-red-300'
+    bg: 'text-red-600'
   }
 }
 
@@ -61,7 +61,7 @@ export default function CardTicket({
   console.log(status)
   return (
     <Link href='/dashboard/tickets/[id]' as={`/tickets/${ticketId}`}>
-      <div className='border border-foreground rounded-2xl overflow-hidden border-dashed hover:border-primary transition-border duration-300 ease-in'>
+      <div className='bg-white/30 backdrop-blur-md border border-foreground rounded-2xl overflow-hidden border-dashed hover:border-primary transition-border duration-300 ease-in'>
         <div className='flex justify-between items-center p-4 '>
           <p>{eventName}</p>
           <p

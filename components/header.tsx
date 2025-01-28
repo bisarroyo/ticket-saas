@@ -45,7 +45,7 @@ export default function Header() {
   }
   return (
     <>
-      <header className='md:sticky top-0 left-0 right-0 h-auto bg-white/50 backdrop-blur-lg border-b-1 z-10'>
+      <header className='md:sticky top-0 left-0 right-0 h-auto  backdrop-blur-lg border-b-1 z-10'>
         <div className='container h-auto md:h-[70px] w-full py-4 gap-4 flex justify-evenly md:justify-between items-center flex-row flex-wrap md:flex-nowrap'>
           <div className=''>
             <Link href='/' className='flex justify-center items-center'>
@@ -56,7 +56,7 @@ export default function Header() {
             <Link
               href='/'
               className={cn(
-                'hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                'text-black hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
                 activeLink('/') && 'text-primary opacity-100'
               )}
             >
@@ -68,7 +68,7 @@ export default function Header() {
                 <Link
                   href='/tickets'
                   className={cn(
-                    'hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                    ' text-black hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
                     activeLink('/tickets') && 'text-primary'
                   )}
                 >
