@@ -115,7 +115,8 @@ export async function signup(
     password: data.password,
     options: {
       data: {
-        name: data.fullname
+        name: data.fullname,
+        full_name: data.fullname
       }
     }
   })
@@ -296,5 +297,33 @@ export async function updateUser(
     success: true,
     error: [],
     inputs: data
+  }
+}
+
+export async function deleteAccount(): Promise<FormState> {
+  const supabase = await createClient()
+
+  const { data } = await supabase.auth.getUser()
+  if (!data || !data.user) {
+    return {
+      success: false,
+      error: [{ type: 'email', message: 'No se pudo eliminar el usuario.' }],
+      inputs: {}
+    }
+  }
+
+  const { error } = await supabase.auth.admin.deleteUser(data.user.id)
+
+  if (error) {
+    return {
+      success: false,
+      error: [{ type: 'error', message: 'No se pudo eliminar el usuario.' }],
+      inputs: {}
+    }
+  }
+  return {
+    success: true,
+    error: [],
+    inputs: {}
   }
 }
