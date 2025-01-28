@@ -5,11 +5,12 @@ import type { User } from '@supabase/supabase-js'
 export default function useUser() {
   const [data, setData] = useState<User>()
   const [error, setError] = useState<string | null>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [updatingUser, setUpdatingUser] = useState<boolean>(false)
 
   const supabase = createClient()
   useEffect(() => {
-    const fetchTickets = async () => {
+    const fetchUser = async () => {
       setLoading(true)
       const {
         data: { user }
@@ -23,12 +24,12 @@ export default function useUser() {
       setLoading(false)
     }
 
-    fetchTickets()
+    fetchUser()
   }, [supabase])
 
   const updateUser = async (full_name?: string, email?: string) => {
     try {
-      setLoading(true)
+      setUpdatingUser(true)
       const { data: updatedData, error: updatedError } =
         await supabase.auth.updateUser({
           email,
@@ -41,11 +42,11 @@ export default function useUser() {
       } else {
         setData(updatedData.user)
       }
-      setLoading(false)
+      setUpdatingUser(false)
     } catch (e) {
       console.log(e)
     }
   }
 
-  return { data, error, loading, updateUser }
+  return { data, error, loading, updateUser, updatingUser }
 }
