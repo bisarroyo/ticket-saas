@@ -28,7 +28,7 @@ export const eventStore = create<EventState>((set, get) => ({
     const { data, error } = await supabase
       .from('events') // Tipar explícitamente la tabla como Event
       .select(
-        'name, description, id, date, event_image, aditional_info, locations(name)'
+        'name, description, id, date, event_image, aditional_info, prices, locations(name)'
       )
 
     if (error) {
