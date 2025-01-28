@@ -37,6 +37,7 @@ export default function Event() {
   return (
     <section className='my-5'>
       <SingleEvent
+        events={event}
         id={event.id}
         name={event.name}
         url={event.event_image}
@@ -44,6 +45,7 @@ export default function Event() {
         location={event.locations[0]?.name || 'Ubicación no disponible'}
         description={event.description}
         aditional_info={event.aditional_info || 'Sin información adicional'}
+        prices={event.prices}
       />
     </section>
   )
