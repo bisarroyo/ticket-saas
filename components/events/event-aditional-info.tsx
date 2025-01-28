@@ -1,12 +1,16 @@
 type Props = {
-  text: string | undefined
+  details: string[] | undefined
 }
 
-export default function EventAditionalInfo({ text }: Props) {
+export default function EventAditionalInfo({ details }: Props) {
   return (
     <div className=''>
       <h3>Información adicional</h3>
-      <p>{text}</p>
+      <ul>
+        {details?.map((detail, index) => (
+          <li key={index}>{detail}</li>
+        ))}
+      </ul>
     </div>
   )
 }
