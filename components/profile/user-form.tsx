@@ -50,9 +50,9 @@ const UserForm: React.FC<{
         >
           <InputUserForm
             label='Nombre:'
-            id='email'
+            id='full_name'
             type='text'
-            placeholder='nombre@email.com'
+            placeholder='Tu nombre'
             {...register('full_name')}
             required
             error={errors?.full_name?.message}
