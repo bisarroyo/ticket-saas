@@ -68,7 +68,7 @@ export const Modal = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className='relative z-10 flex items-center justify-center bg-white p-5 rounded-lg min-w-[300px] max-w-[600px] min-h-[300px] max-h-[600px] overflow-y-auto'
+            className='relative z-10 flex items-center justify-center bg-white p-4 mx-4 rounded-lg min-w-[300px] max-w-[600px] min-h-[300px] max-h-[600px] overflow-y-auto'
             ref={dropdownRef}
           >
             {hasCloseBtn && (
