@@ -80,7 +80,7 @@ export default function Header() {
           </div>
           <div className=''>
             {user ? (
-              <div className='flex-'>
+              <div>
                 <Dropdown text={user} icon={<User />}>
                   <Link href='/profile'>
                     <DropdownItem icon={<User size={20} />}>
