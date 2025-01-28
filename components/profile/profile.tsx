@@ -8,11 +8,11 @@ const UserProfile: React.FC<{
   console.log(user)
   return (
     <div className='container max-w-xl mx-auto flex gap-4 my-8'>
-      <div className='with-[100px]'>
+      <div className='w-[100px]'>
         <Image
           src={user?.user_metadata.avatar_url}
           className='w-20 h-20 rounded-full'
-          alt=''
+          alt='User photo'
           width={100}
           height={100}
         />
