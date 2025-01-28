@@ -11,7 +11,7 @@ export type Database = {
     Tables: {
       events: {
         Row: {
-          aditional_info: string | null
+          aditional_info: Json[] | null
           capacity: number
           created_at: string
           date: string
@@ -22,6 +22,7 @@ export type Database = {
           is_active: boolean
           is_online: boolean
           name: string
+          prices: Json | null
           starts_at: string
           status: string
           updated_at: string
@@ -29,7 +30,7 @@ export type Database = {
           user_manager: string
         }
         Insert: {
-          aditional_info?: string | null
+          aditional_info?: Json[] | null
           capacity?: number
           created_at?: string
           date: string
@@ -40,6 +41,7 @@ export type Database = {
           is_active?: boolean
           is_online?: boolean
           name: string
+          prices?: Json | null
           starts_at: string
           status: string
           updated_at?: string
@@ -47,7 +49,7 @@ export type Database = {
           user_manager: string
         }
         Update: {
-          aditional_info?: string | null
+          aditional_info?: Json[] | null
           capacity?: number
           created_at?: string
           date?: string
@@ -58,6 +60,7 @@ export type Database = {
           is_active?: boolean
           is_online?: boolean
           name?: string
+          prices?: Json | null
           starts_at?: string
           status?: string
           updated_at?: string
