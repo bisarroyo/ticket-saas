@@ -8,31 +8,18 @@ import {
   TableRow
 } from '@/components/ui/table'
 
-// type Props = {
-//   location: string
-//   price: number
-// }
+type Props = {
+  prices: {
+    location: string
+    price: number
+  }[]
+}
 
-const data = [
-  {
-    location: 'Sol',
-    price: 100
-  },
-  {
-    location: 'Palco',
-    price: 200
-  },
-  {
-    location: 'Sombra',
-    price: 300
-  }
-]
-
-export default function EventPrices() {
+export default function EventPrices({ prices }: Props) {
   return (
     <div className='w-full'>
       <h3 className='text-2xl font-bold mb-4'>Precios</h3>
-      <div className='border p-2 md:p-4 rounded-lg '>
+      <div className='border border-white/30 p-2 md:p-4 rounded-lg '>
         <Table>
           <TableCaption>Lista de precios.</TableCaption>
           <TableHeader>
@@ -42,12 +29,10 @@ export default function EventPrices() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((event) => (
-              <TableRow key={event.location}>
+            {prices?.map((event, index) => (
+              <TableRow key={index}>
                 <TableCell className='font-medium'>{event.location}</TableCell>
-                <TableCell className='text-right'>
-                  $ {event.price.toLocaleString()}
-                </TableCell>
+                <TableCell className='text-right'>$ {event.price}</TableCell>
               </TableRow>
             ))}
           </TableBody>
