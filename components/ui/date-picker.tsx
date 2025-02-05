@@ -4,8 +4,6 @@ import { cn } from '@/lib/utils'
 import { addDay } from '@formkit/tempo'
 import { useEffect, useState } from 'react'
 
-import 'react-datepicker/dist/react-datepicker.css'
-
 interface InputProps extends React.HTMLProps<HTMLInputElement> {
   id: string
   value?: string
