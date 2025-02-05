@@ -7,6 +7,14 @@ import { Analytics } from '@vercel/analytics/react'
 // import Header from '@/components/header'
 import './globals.css'
 
+// Mantine ui provider
+import '@mantine/core/styles.css'
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  mantineHtmlProps
+} from '@mantine/core'
+
 //componets
 import Header from '@/components/header'
 
@@ -31,12 +39,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='es'>
+    <html lang='es' {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh`}
       >
-        <Header />
-        {children}
+        <MantineProvider>
+          <Header />
+          {children}
+        </MantineProvider>
         <SpeedInsights />
         <Analytics />
       </body>

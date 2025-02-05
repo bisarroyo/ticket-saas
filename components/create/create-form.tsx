@@ -11,6 +11,8 @@ import DatePickerComponent from '@/components/ui/date-picker'
 import { useEffect, useState } from 'react'
 import { Pen } from 'lucide-react'
 
+import { DateInput } from '@mantine/dates'
+
 interface FormInputs {
   name: string
   date_start: string
@@ -50,6 +52,8 @@ const CreateForm = () => {
 
   const [dateStart, setDateStart] = useState<string>()
   const [dateEnd, setDateEnd] = useState<string>()
+
+  const [value, setValue] = useState<Date | null>(null)
 
   const onSubmit: SubmitHandler<FormInputs> = (e) => {
     console.log(e)
@@ -120,6 +124,12 @@ const CreateForm = () => {
             onChange={(event) =>
               setDateEnd((event.target as HTMLInputElement).value)
             }
+          />
+          <DateInput
+            value={value}
+            onChange={setValue}
+            label='Date input'
+            placeholder='Date input'
           />
 
           <Button
