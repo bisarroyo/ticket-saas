@@ -6,10 +6,10 @@ import { z } from 'zod'
 // validation
 import { createSchema } from '@/utils/validations/validations'
 import InputClient from '@/components/ui/input-client'
-import Button from '@/components/ui/button'
 
-import { Pen } from 'lucide-react'
-import DateRange from '../ui/date-range'
+import Button from '@/components/ui/button'
+import DateRange from '@/components/ui/date-range'
+import TextArea from '@/components/ui/text-area'
 
 interface FormInputs {
   name: string
@@ -66,30 +66,13 @@ const CreateForm = () => {
             {...register('name')}
             required
             error={errors?.name?.message}
-            icon={
-              <Pen
-                strokeWidth={1.5}
-                size='20'
-                color='var(--muted-foreground)'
-                className='absolute bottom-3 end-2'
-              />
-            }
           />
-          <InputClient
+          <TextArea
             id='description'
-            type='text'
             placeholder='Descripción'
             {...register('description')}
             required
             error={errors?.description?.message}
-            icon={
-              <Pen
-                strokeWidth={1.5}
-                size='20'
-                color='var(--muted-foreground)'
-                className='absolute bottom-3 end-2'
-              />
-            }
           />
           <DateRange />
 
