@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { DateInput } from '@mantine/dates'
 import '@mantine/dates/styles.css'
 import type { DateValue } from '@mantine/dates'
+import { Calendar } from 'lucide-react'
 
 interface InputProps {
   id: string
@@ -57,9 +58,11 @@ const DatePickerComponent: React.FC<InputProps> = ({
           onChange={handleDateChange}
           minDate={min}
           maxDate={addDay(min, 360)}
-          placeholder='Date input'
+          placeholder='Ingresa una fecha'
+          valueFormat='DD/MM/YYYY'
+          leftSection={<Calendar size={18} />}
           className={cn(
-            ' rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
+            'w-full rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
             error && 'border-danger focus:ring-danger',
             className
           )}
