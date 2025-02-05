@@ -47,3 +47,23 @@ export const updateSchema = z.object({
     message: 'Debe ingresar una dirección de correo electrónico válida.'
   })
 })
+
+export const createSchema = z.object({
+  name: z.string().min(3, {
+    message: 'El nombre debe ser mayor a 3 caracteres.'
+  }),
+  date_start: z.string(),
+  date_end: z.string(),
+  description: z.string(),
+  status: z.string(),
+  url: z.string(),
+  capacity: z.number(),
+  event_image: z.string(),
+  aditional_info: z.array(z.string()),
+  prices: z.array(
+    z.object({
+      location: z.string(),
+      price: z.number()
+    })
+  )
+})
