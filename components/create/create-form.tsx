@@ -7,11 +7,9 @@ import { z } from 'zod'
 import { createSchema } from '@/utils/validations/validations'
 import InputClient from '@/components/ui/input-client'
 import Button from '@/components/ui/button'
-import DatePickerComponent from '@/components/ui/date-picker'
-import { useEffect, useState } from 'react'
-import { Pen } from 'lucide-react'
 
-import { DateInput } from '@mantine/dates'
+import { Pen } from 'lucide-react'
+import DateRange from '../ui/date-range'
 
 interface FormInputs {
   name: string
@@ -50,26 +48,9 @@ const CreateForm = () => {
     mode: 'onTouched'
   })
 
-  const [dateStart, setDateStart] = useState<string>()
-  const [dateEnd, setDateEnd] = useState<string>()
-
-  const [value, setValue] = useState<Date | null>(null)
-
   const onSubmit: SubmitHandler<FormInputs> = (e) => {
     console.log(e)
   }
-
-  useEffect(() => {
-    if (dateEnd && dateStart && dateEnd < dateStart) {
-      setDateEnd(dateStart)
-      console.log('update')
-    }
-  }, [dateStart, dateEnd])
-  useEffect(() => {
-    const date = new Date().toISOString().split('T')[0]
-    setDateStart(date)
-    setDateEnd(date)
-  }, [])
 
   return (
     <section>
@@ -110,27 +91,7 @@ const CreateForm = () => {
               />
             }
           />
-          <DatePickerComponent
-            id='date_start'
-            value={dateStart}
-            onChange={(event) => {
-              setDateStart((event.target as HTMLInputElement).value)
-            }}
-          />
-          <DatePickerComponent
-            id='date_end'
-            value={dateEnd}
-            minDate={dateStart}
-            onChange={(event) =>
-              setDateEnd((event.target as HTMLInputElement).value)
-            }
-          />
-          <DateInput
-            value={value}
-            onChange={setValue}
-            label='Date input'
-            placeholder='Date input'
-          />
+          <DateRange />
 
           <Button
             text='Actualizar perfil'

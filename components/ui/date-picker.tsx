@@ -4,12 +4,16 @@ import { cn } from '@/lib/utils'
 import { addDay } from '@formkit/tempo'
 import { useEffect, useState } from 'react'
 
-interface InputProps extends React.HTMLProps<HTMLInputElement> {
+import { DateInput } from '@mantine/dates'
+import '@mantine/dates/styles.css'
+import type { DateValue } from '@mantine/dates'
+
+interface InputProps {
   id: string
-  value?: string
+  value?: DateValue
   error?: string
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => void
-  minDate?: string
+  onChange?: (date: Date | null) => void
+  minDate?: Date
   className?: string
 }
 
@@ -22,38 +26,40 @@ const DatePickerComponent: React.FC<InputProps> = ({
   className,
   ...props
 }) => {
-  const [date, setDate] = useState<string>(value ?? '')
-  const [min, setMin] = useState<string>(minDate ?? '')
+  const [date, setDate] = useState<DateValue>()
+  const [min, setMin] = useState<Date>(minDate ?? new Date())
 
   useEffect(() => {
     if (value) {
       setDate(value)
     } else {
-      setDate(new Date().toISOString().split('T')[0])
+      setDate(new Date())
     }
   }, [value])
   useEffect(() => {
     if (minDate) {
       setMin(minDate)
     } else {
-      setMin(new Date().toISOString().split('T')[0])
+      setMin(new Date())
     }
   }, [minDate])
+
+  const handleDateChange = (date: Date | null) => {
+    setDate(date)
+    onChange?.(date)
+  }
   return (
     <div className='flex flex-col justify-start items-start '>
       <div className='flex flex-col w-full relative'>
-        <input
-          type='date'
+        <DateInput
           id={id}
-          value={date ?? ''}
-          onChange={(e) => {
-            setDate(e.target.value)
-            if (onChange) onChange(e)
-          }}
-          min={min}
-          max={addDay(min, 360).toISOString().split('T')[0]}
+          value={date}
+          onChange={handleDateChange}
+          minDate={min}
+          maxDate={addDay(min, 360)}
+          placeholder='Date input'
           className={cn(
-            'px-4 py-2 border rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
+            ' rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
             error && 'border-danger focus:ring-danger',
             className
           )}
