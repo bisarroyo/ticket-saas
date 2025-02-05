@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 
 interface InputProps extends React.HTMLProps<HTMLInputElement> {
   id: string
-  label: string
+  label?: string
   icon?: React.ReactNode
   error?: { type: string; message: string }[]
 }
