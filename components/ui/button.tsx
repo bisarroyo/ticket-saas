@@ -2,18 +2,18 @@ import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const buttonVariants = cva(
-  'text-md py-2 px-4 text-center rounded-md   focus:outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed',
+  'text-md py-2 px-4 text-center rounded-md   focus:outline-hidden transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
         default:
           'bg-primary text-primary-foreground shadow-xl hover:bg-primary',
         danger:
-          'bg-danger text-danger-foreground shadow-sm hover:bg-destructive/90',
+          'bg-danger text-danger-foreground shadow-xs hover:bg-destructive/90',
         outline:
-          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+          'border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground',
         secondary:
-          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+          'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline'
       }

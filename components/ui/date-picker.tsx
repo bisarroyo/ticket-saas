@@ -62,7 +62,7 @@ const DatePickerComponent: React.FC<InputProps> = ({
           valueFormat='DD/MM/YYYY'
           leftSection={<Calendar size={18} />}
           className={cn(
-            'w-full rounded-md focus:ring-1 focus-visible:outline-none focus:outline-none focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
+            'w-full rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
             error && 'border-danger focus:ring-danger',
             className
           )}

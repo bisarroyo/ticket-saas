@@ -18,7 +18,7 @@ export default function NotFound() {
         <div className='flex justify-center gap-4'>
           <Link
             href='/'
-            className='group inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200  '
+            className='group inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200  '
           >
             <ArrowLeft
               className='h-4 w-4 group-hover:-translate-x-1 transition-transform duration-200'
