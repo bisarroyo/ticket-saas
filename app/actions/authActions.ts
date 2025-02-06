@@ -311,10 +311,12 @@ export async function deleteAccount(): Promise<FormState> {
       inputs: {}
     }
   }
+  console.log(data.user.id)
 
   const { error } = await supabase.auth.admin.deleteUser(data.user.id)
 
   if (error) {
+    console.log(error)
     return {
       success: false,
       error: [{ type: 'error', message: 'No se pudo eliminar el usuario.' }],
