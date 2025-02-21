@@ -4,6 +4,7 @@ interface InputProps extends React.HTMLProps<HTMLTextAreaElement> {
   id: string
   label?: string
   error?: string
+  className?: string
 }
 
 const TextArea: React.FC<InputProps> = ({
