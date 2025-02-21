@@ -10,6 +10,7 @@ import InputClient from '@/components/ui/input-client'
 import Button from '@/components/ui/button'
 import DateRange from '@/components/ui/date-range'
 import TextArea from '@/components/ui/text-area'
+import FileUpload from '@/components/ui/file-upload'
 
 interface FormInputs {
   name: string
@@ -59,6 +60,7 @@ const CreateForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           className='flex flex-col items-start justify-center w-full gap-4'
         >
+          <FileUpload id='event_image' {...register('event_image')} />
           <InputClient
             id='name'
             type='text'
