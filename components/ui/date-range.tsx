@@ -27,7 +27,7 @@ const DateRange = () => {
         <div className='absolute top-7 left-1 w-1 h-8 border-r border-dashed border-r-black/50'></div>
         <div className='flex flex-row gap-4 justify-center items-center'>
           <Circle size={16} />
-          <p className='w-12'>Inicio</p>
+          <p className='w-12 min-w-[50px]'>Inicio</p>
           <DatePickerComponent
             id='date_start'
             value={dateStart}
@@ -41,7 +41,7 @@ const DateRange = () => {
         </div>
         <div className='flex flex-row gap-4 justify-center items-center'>
           <CircleDashed size={16} />
-          <p className='w-12'>Fin</p>
+          <p className='w-12 min-w-[50px]'>Fin</p>
           <DatePickerComponent
             id='date_end'
             value={dateEnd}
