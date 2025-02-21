@@ -32,13 +32,11 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
 }
 
 interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
-  text?: string
   icon?: React.ReactNode
   children: React.ReactNode
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
-  text,
   children,
   icon,
   className
@@ -70,9 +68,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
       {/* Botón del Dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='inline-flex w-full justify-center items-center gap-2 rounded-full border border-gray-300 bg-white/70 backdrop-blur-md px-2 md:px-4 py-2 text-md font-medium text-gray-700 shadow-xs'
+        className='inline-flex w-full justify-center items-center gap-2 rounded-full aspect-square border border-gray-300 bg-white/70 backdrop-blur-md px-2 md:px-2 py-2 text-md font-medium text-gray-700 shadow-xs cursor-pointer'
       >
-        <p className='hidden md:block'>{text}</p>
         {icon}
       </button>
 
