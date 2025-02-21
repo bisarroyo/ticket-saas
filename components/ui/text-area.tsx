@@ -22,7 +22,7 @@ const TextArea: React.FC<InputProps> = ({
           <textarea
             id={id}
             className={cn(
-              'pl-4 pr-8 py-2 w-full h-auto border rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary-foreground/50 text-foreground resize-none',
+              'pl-4 pr-8 py-2 w-full h-auto border rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary-foreground/50 text-foreground resize-none bg-primary-foreground',
               error && 'border-danger focus:ring-danger',
               className
             )}
