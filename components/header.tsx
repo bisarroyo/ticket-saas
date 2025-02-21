@@ -81,7 +81,7 @@ export default function Header() {
           <div className=''>
             {user ? (
               <div>
-                <Dropdown text={user} icon={<User />}>
+                <Dropdown icon={<User />}>
                   <Link href='/profile'>
                     <DropdownItem icon={<User size={20} />}>
                       <p>Mi perfil</p>
