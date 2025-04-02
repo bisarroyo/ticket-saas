@@ -4,8 +4,12 @@ import NotFound from '@/components/ui/not-found'
 
 import { createClient } from '@/utils/supabase/server'
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = params
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
 
   const supabase = await createClient()
 
@@ -14,7 +18,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select(
       'name, description, id, date, event_image, aditional_info, prices, locations(name)'
     )
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   // Manejar errores o casos donde no se encuentre el evento
