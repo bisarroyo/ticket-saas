@@ -4,15 +4,12 @@ import { cn } from '@/lib/utils'
 import { addDay } from '@formkit/tempo'
 import { useEffect, useState } from 'react'
 
-import { DateInput } from '@mantine/dates'
-import '@mantine/dates/styles.css'
-import type { DateValue } from '@mantine/dates'
-import { Calendar } from 'lucide-react'
+// import { Calendar } from 'lucide-react'
 
 interface InputProps {
   id: string
-  value?: DateValue
   error?: string
+  value?: Date
   onChange?: (date: Date | null) => void
   minDate?: Date
   className?: string
@@ -27,7 +24,7 @@ const DatePickerComponent: React.FC<InputProps> = ({
   className,
   ...props
 }) => {
-  const [date, setDate] = useState<DateValue>()
+  const [date, setDate] = useState<Date>()
   const [min, setMin] = useState<Date>(minDate ?? new Date())
 
   useEffect(() => {
@@ -46,21 +43,21 @@ const DatePickerComponent: React.FC<InputProps> = ({
   }, [minDate])
 
   const handleDateChange = (date: Date | null) => {
-    setDate(date)
+    setDate(date ?? undefined)
     onChange?.(date)
   }
   return (
     <div className='flex flex-col justify-start items-start '>
       <div className='flex flex-col w-full relative'>
-        <DateInput
+        <input
+          type='date'
           id={id}
-          value={date}
-          onChange={handleDateChange}
-          minDate={min}
-          maxDate={addDay(min, 360)}
-          placeholder='Ingresa una fecha'
-          valueFormat='DD/MM/YYYY'
-          leftSection={<Calendar size={18} />}
+          value={date ? date.toISOString().split('T')[0] : ''}
+          onChange={(e) =>
+            handleDateChange(e.target.value ? new Date(e.target.value) : null)
+          }
+          min={min.toISOString().split('T')[0]}
+          max={addDay(min, 360).toISOString().split('T')[0]}
           className={cn(
             'w-full rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary-foreground/50 cursor-pointer transition-all duration-300 ',
             error && 'border-danger focus:ring-danger',
