@@ -131,24 +131,24 @@ h3 {
 }
 
 /* Para Chrome, Edge, Safari */
-input[type='date']::-webkit-calendar-picker-indicator {
-  /* display: none; */
-  /* -webkit-appearance: none; */
+/* input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 
   background: transparent;
-}
+} */
 
 /* Para Firefox */
-input[type='date'] {
+/* input[type='date'] {
   appearance: none;
   -moz-appearance: textfield;
   background-image: url(/calendar.svg);
   background-repeat: no-repeat;
   background-position: right 0.9rem center;
   background-size: 1.5rem;
-}
+} */
 
 /* Para Edge */
-input[type='date']::-ms-clear {
+/* input[type='date']::-ms-clear {
   display: none;
-}
+} */
