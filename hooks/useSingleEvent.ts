@@ -2,14 +2,15 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
-const useEvents = () => {
-  const [data, setData] = useState<EventsWithLocationType[]>([])
+const useSingleEvent = (id: string | undefined) => {
+  const [data, setData] = useState<EventsWithLocationType>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
   const supabase = createClient()
 
   useEffect(() => {
+    if (!id) return
     const fetchData = async () => {
       setLoading(true)
       setError(null)
@@ -20,6 +21,8 @@ const useEvents = () => {
           .select(
             'name, description, id, date, event_image, aditional_info, prices, locations(name)'
           )
+          .eq('id', id)
+          .single()
         if (error) throw error
         setData(data)
       } catch (err) {
@@ -30,9 +33,9 @@ const useEvents = () => {
     }
 
     fetchData()
-  }, [supabase])
+  }, [supabase, id])
 
   return { data, loading, error }
 }
 
-export default useEvents
+export default useSingleEvent
