@@ -14,7 +14,7 @@ export default function Page() {
 
   const supabase = createClient()
   const [event, setEvent] = useState<EventsWithLocationType>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     if (!id) return
@@ -28,7 +28,6 @@ export default function Page() {
         .eq('id', id)
         .single()
       if (data) {
-        console.log(data)
         setEvent(data)
         setLoading(false)
       }
@@ -41,17 +40,17 @@ export default function Page() {
   }, [id, supabase])
 
   // Manejar errores o casos donde no se encuentre el evento
-  if (!id || !event) {
-    return (
-      <div className='container'>
-        <NotFound />
-      </div>
-    )
-  }
   if (loading) {
     return (
       <div className='container'>
         <Loading />
+      </div>
+    )
+  }
+  if (!id || !event) {
+    return (
+      <div className='container'>
+        <NotFound />
       </div>
     )
   }
