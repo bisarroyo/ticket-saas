@@ -1,15 +1,17 @@
+'use client'
 // import BuyTickets from '@/components/buy/buy-tickets'
 
-export default async function Page({
-  params
-}: {
-  params: Promise<{ id: string }>
-}) {
-  const { id } = await params
+import { useParams } from 'next/navigation'
+const Page = () => {
+  const params = useParams()
+  const { id } = params
+
   return (
     <section className='container'>
-      <div>{id}</div>
-      {/* {id ? <BuyTickets id={id} /> : <p>Error: Invalid or missing ID</p>} */}
+      {id}
+      {/* <BuyTickets id={id} /> */}
     </section>
   )
 }
+
+export default Page
