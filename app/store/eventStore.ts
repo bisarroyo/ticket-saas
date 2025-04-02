@@ -40,25 +40,26 @@ export const eventStore = create<EventState>((set, get) => ({
 
   fetchById: async (id: string) => {
     set({ loading: true, error: null })
+
+    // Verificar si ya tenemos el evento en cache
+    const existingEvent = get().data.find((event) => event.id === id)
+    if (existingEvent) {
+      set({ loading: false })
+      return
+    }
+
     const { data, error } = await supabase
       .from('events')
       .select(
         'name, description, id, date, event_image, aditional_info, locations(name)'
       )
       .eq('id', id)
-      .single() // Solo queremos un resultado
+      .single()
 
     if (error) {
       set({ error, loading: false })
     } else if (data) {
-      // Verifica si el evento ya está en el store antes de agregarlo
-      const currentData = get().data
-      const exists = currentData.some((event) => event.id === data.id)
-      if (!exists) {
-        set({ data: [...currentData, data], loading: false })
-      } else {
-        set({ loading: false })
-      }
+      set({ data: [...get().data, data], loading: false })
     }
   },
   getById: (id: string): EventsWithLocationType | undefined => {
