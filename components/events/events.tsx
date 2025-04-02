@@ -5,10 +5,13 @@ import CardEvent from '@/components/events/card-event'
 import Loading from '@/components/ui/loading'
 
 // state
-import { eventStore } from '@/app/store/eventStore'
+import useEvents from '@/hooks/useEvents'
 
 export default function Events() {
-  const { data: events, loading } = eventStore()
+  const { data: events, loading, error } = useEvents()
+  if (error) {
+    return <div>error</div>
+  }
 
   return (
     <>
@@ -19,7 +22,7 @@ export default function Events() {
           </div>
         ) : (
           <div className=' py-5 gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center align-middle'>
-            {events?.map((event) => (
+            {events?.map((event: EventsWithLocationType) => (
               <CardEvent
                 key={event.id}
                 location={event.locations[0]?.name}

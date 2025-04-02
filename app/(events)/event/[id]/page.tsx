@@ -4,40 +4,16 @@ import SingleEvent from '@/components/events/single-event'
 import NotFound from '@/components/ui/not-found'
 import Loading from '@/components/ui/loading'
 
-import { createClient } from '@/utils/supabase/client'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import useSingleEvent from '@/hooks/useSingleEvent'
 
 export default function Page() {
   const params = useParams()
-  const id = Array.isArray(params.id) ? params.id[0] : params.id
+  const id: string | undefined = Array.isArray(params.id)
+    ? params.id[0]
+    : params.id
 
-  const supabase = createClient()
-  const [event, setEvent] = useState<EventsWithLocationType>()
-  const [loading, setLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    if (!id) return
-    const fetchData = async () => {
-      setLoading(true)
-      const { data, error } = await supabase
-        .from('events')
-        .select(
-          'name, description, id, date, event_image, aditional_info, prices, locations(name)'
-        )
-        .eq('id', id)
-        .single()
-      if (data) {
-        setEvent(data)
-        setLoading(false)
-      }
-      if (error) {
-        setLoading(false)
-        console.log(error)
-      }
-    }
-    fetchData()
-  }, [id, supabase])
+  const { data: event, loading, error } = useSingleEvent(id)
 
   // Manejar errores o casos donde no se encuentre el evento
   if (loading) {
@@ -47,7 +23,7 @@ export default function Page() {
       </div>
     )
   }
-  if (!id || !event) {
+  if (!id || !event || error) {
     return (
       <div className='container'>
         <NotFound />
