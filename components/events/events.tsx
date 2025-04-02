@@ -27,7 +27,7 @@ export default function Events() {
                 url={`/event/${event.id}`}
                 date={format(event.date, { date: 'long' }, 'es')}
                 time={format(event.date, { time: 'short' })}
-                image={event.event_image}
+                // image={event.event_image}
               />
             ))}
           </div>
