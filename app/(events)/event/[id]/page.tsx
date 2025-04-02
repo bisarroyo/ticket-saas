@@ -1,44 +1,24 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
 import SingleEvent from '@/components/events/single-event'
 import NotFound from '@/components/ui/not-found'
-import Loading from '@/components/ui/loading'
+// import Loading from '@/components/ui/loading'
 
-// Zustand store
-import { eventStore } from '@/app/store/eventStore'
+import { createClient } from '@/utils/supabase/server'
 
-export default function Event() {
-  const params = useParams()
+export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params
 
-  const { getById, fetchById, loading, error } = eventStore()
+  const supabase = await createClient()
 
-  const [isFetching, setIsFetching] = useState(false)
-
-  useEffect(() => {
-    if (id) {
-      const eventExists = getById(id.toString())
-      if (!eventExists) {
-        setIsFetching(true)
-        fetchById(id.toString()).finally(() => setIsFetching(false))
-      }
-    }
-  }, [id, fetchById, getById])
-
-  const event = id ? getById(id.toString()) : null
-  // Mostrar el componente de carga si aún no se han cargado los datos
-  if (loading || isFetching) {
-    return (
-      <div className='container'>
-        <Loading />
-      </div>
+  const { data: event } = await supabase
+    .from('events')
+    .select(
+      'name, description, id, date, event_image, aditional_info, prices, locations(name)'
     )
-  }
+    .eq('id', params.id)
+    .single()
 
   // Manejar errores o casos donde no se encuentre el evento
-  if (error || !id || !event) {
+  if (!id || !event) {
     return (
       <div className='container'>
         <NotFound />
@@ -46,7 +26,7 @@ export default function Event() {
     )
   }
 
-  // Renderizar el evento si todo está correcto
+  // // Renderizar el evento si todo está correcto
   return (
     <section className='my-5'>
       <SingleEvent
