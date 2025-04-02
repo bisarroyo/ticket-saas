@@ -40,7 +40,7 @@ export default function Event() {
         events={event}
         id={event.id}
         name={event.name}
-        url={event.event_image}
+        // url={event.event_image}
         date={event.date}
         location={event.locations[0]?.name || 'Ubicación no disponible'}
         description={event.description}
