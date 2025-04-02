@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import SingleEvent from '@/components/events/single-event'
 import NotFound from '@/components/ui/not-found'
@@ -12,10 +13,23 @@ export default function Event() {
   const params = useParams()
   const { id } = params
 
-  const { getById, loading, error } = eventStore()
+  const { getById, fetchById, loading, error } = eventStore()
 
+  const [isFetching, setIsFetching] = useState(false)
+
+  useEffect(() => {
+    if (id) {
+      const eventExists = getById(id.toString())
+      if (!eventExists) {
+        setIsFetching(true)
+        fetchById(id.toString()).finally(() => setIsFetching(false))
+      }
+    }
+  }, [id, fetchById, getById])
+
+  const event = id ? getById(id.toString()) : null
   // Mostrar el componente de carga si aún no se han cargado los datos
-  if (loading) {
+  if (loading || isFetching) {
     return (
       <div className='container'>
         <Loading />
@@ -24,7 +38,6 @@ export default function Event() {
   }
 
   // Manejar errores o casos donde no se encuentre el evento
-  const event = id ? getById(id.toString()) : null
   if (error || !id || !event) {
     return (
       <div className='container'>
@@ -40,7 +53,7 @@ export default function Event() {
         events={event}
         id={event.id}
         name={event.name}
-        // url={event.event_image}
+        url={event.event_image}
         date={event.date}
         location={event.locations[0]?.name || 'Ubicación no disponible'}
         description={event.description}

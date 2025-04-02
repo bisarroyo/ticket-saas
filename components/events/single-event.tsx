@@ -1,4 +1,4 @@
-// import EventHero from './event-hero'
+import EventHero from './event-hero'
 import EventDetails from './event-details'
 import EventDescription from './event-description'
 // import EventLocation from './event-location'
@@ -11,7 +11,7 @@ import { ArrowUpRight } from 'lucide-react'
 export default function SingleEvent({
   id,
   name,
-  // url,
+  url,
   date,
   location,
   description,
@@ -21,7 +21,7 @@ export default function SingleEvent({
   return (
     <div className='container'>
       <div className='max-w-4xl grid grid-cols-1  gap-x-8 gap-y-12 mx-auto'>
-        {/* <EventHero img={url} isAvailable={true} /> */}
+        <EventHero img={url} isAvailable={true} />
         <div className='grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 lg:gap-8'>
           <div className='w-full flex flex-col justify-center md:justify-start md:items-start items-center'>
             <EventDetails date={date} location={location} isAvailable={false} />
