@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = ({
           <input
             id={id}
             className={cn(
-              'pl-4 pr-8 py-2 w-full border rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary-foreground/50',
+              'pl-4 pr-8 py-2 w-full border rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary/50 bg-slate-100',
               checkType(error, id) && 'border-danger focus:ring-danger',
               className
             )}
