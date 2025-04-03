@@ -1,7 +1,7 @@
 import EventHero from './event-hero'
 import EventDetails from './event-details'
 import EventDescription from './event-description'
-// import EventLocation from './event-location'
+import EventLocation from './event-location'
 import EventAditionalInfo from './event-aditional-info'
 
 import Link from 'next/link'
@@ -47,7 +47,7 @@ export default function SingleEvent({
             <EventDescription title={name} description={description} />
             <EventPrices prices={prices} />
             <EventAditionalInfo details={aditional_info} />
-            {/* <EventLocation /> */}
+            <EventLocation />
           </div>
         </div>
       </div>
