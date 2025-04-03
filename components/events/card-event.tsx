@@ -22,7 +22,7 @@ export default function CardEvent({
 }: Props) {
   return (
     <Link href={url}>
-      <div className='bg-white/20 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out'>
+      <div className='bg-white/20 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out p-2'>
         <div className='aspect-16/7 rounded-2xl overflow-hidden'>
           <Image
             src={image}
@@ -32,8 +32,8 @@ export default function CardEvent({
             className='w-full h-full object-cover'
           />
         </div>
-        <div className='p-4'>
-          <h3 className='text-2xl font-bold'>{name}</h3>
+        <div className='pt-4 '>
+          <h3 className='text-lg font-bold'>{name}</h3>
           <div className='flex items-center gap-2'>
             <MapPin size={16} />
             <p className='text-md'>{location}</p>
