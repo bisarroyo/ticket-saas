@@ -12,8 +12,8 @@ import Button from '@/components/ui/button'
 import DateRange from '@/components/ui/date-range'
 import TextArea from '@/components/ui/text-area'
 import FileUpload from '@/components/ui/file-upload'
-import PriceInputGroup from '@/components/ui/PriceInputGroup'
-import TagInput from '@/components/ui/TagInput'
+import PriceInputGroup from '@/components/ui/price-input-group'
+import TagInput from '@/components/ui/tag-input'
 
 // supabase
 import { createClient } from '@/utils/supabase/client'
