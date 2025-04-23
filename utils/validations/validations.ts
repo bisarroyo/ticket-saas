@@ -49,21 +49,46 @@ export const updateSchema = z.object({
 })
 
 export const createSchema = z.object({
-  name: z.string().min(3, {
-    message: 'El nombre debe ser mayor a 3 caracteres.'
-  }),
-  date_start: z.string(),
-  date_end: z.string(),
-  description: z.string(),
-  status: z.string(),
-  url: z.string(),
-  capacity: z.number(),
-  event_image: z.string(),
-  aditional_info: z.array(z.string()),
-  prices: z.array(
-    z.object({
-      location: z.string(),
-      price: z.number()
-    })
-  )
+  name: z
+    .string()
+    .min(3, 'El nombre debe tener al menos 3 caracteres')
+    .max(100, 'Nombre demasiado largo'),
+
+  date_start: z.string().min(1, 'La fecha de inicio es obligatoria'),
+
+  date_end: z.string().min(1, 'La fecha de finalización es obligatoria'),
+
+  description: z
+    .string()
+    .min(10, 'La descripción debe tener al menos 10 caracteres'),
+
+  url: z
+    .string()
+    .min(1, 'La URL del evento es obligatoria')
+    // validación de URL personalizada
+    .regex(
+      /^(https?:\/\/)?(www\.)?[a-z0-9-]+(\.[a-z]{2,})+([\/\w .-]*)*\/?$/,
+      'La URL personalizada no es válida'
+    ),
+
+  capacity: z
+    .number({ invalid_type_error: 'Debe ser un número' })
+    .min(1, 'Debe haber al menos un espacio disponible'),
+
+  // event_image: z.string().url('Debe ser una URL válida de imagen'),
+
+  aditional_info: z.array(z.string()).optional(),
+
+  prices: z
+    .array(
+      z.object({
+        location: z.string().min(1, 'Ubicación requerida'),
+        price: z
+          .number({ invalid_type_error: 'Debe ser un número' })
+          .min(0, 'El precio debe ser mayor o igual a 0')
+      })
+    )
+    .min(1, 'Debe agregar al menos un precio'),
+
+  status: z.string().optional()
 })
