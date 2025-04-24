@@ -18,7 +18,7 @@ type Props = {
 export default function EventPrices({ prices }: Props) {
   return (
     <div className='w-full'>
-      <h3 className='text-2xl font-bold mb-4'>Precios</h3>
+      <h3 className='text-2xl font-semibold mb-4'>Precios</h3>
       <div className='border border-white/30 p-2 md:p-4 rounded-lg '>
         <Table>
           <TableCaption>Lista de precios.</TableCaption>

@@ -27,18 +27,16 @@ export default function SingleEvent({
             <EventDetails date={date} location={location} isAvailable={false} />
             <Link
               href={`/buy/${id}`}
-              className='bg-primary text-primary-foreground border-primary shadow-xl hover:bg-primary/80 text-md py-2 px-4 text-center rounded-md w-full focus:outline-hidden transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
-            >
+              className='bg-primary text-primary-foreground border-primary shadow-xl hover:bg-primary/80 text-md py-2 px-4 text-center rounded-md w-full focus:outline-hidden transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'>
               Adquirir entradas
             </Link>
-            <div className='w-full border-t border-white/30 my-5 py-5 '>
+            <div className='w-full border-t border-white/30 mt-5 pt-5 '>
               <p>Organizado por:</p>
 
               {/* todo: insert correct user */}
               <Link
                 href={`/profile/${'pluscreative'}`}
-                className='flex items-center gap-1 text-slate-700'
-              >
+                className='flex items-center gap-1 text-slate-700'>
                 Plus creative <ArrowUpRight size={16} />
               </Link>
             </div>

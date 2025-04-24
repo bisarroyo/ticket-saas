@@ -84,9 +84,9 @@ h1 {
 h2 {
   @apply text-2xl font-bold;
 }
-h3 {
-  @apply text-xl font-bold;
-}
+/* h3 {
+  @apply text-sm font-bold;
+} */
 
 .loader,
 .loader:before,

@@ -33,7 +33,9 @@ export default function CardEvent({
           />
         </div>
         <div className='pt-4 '>
-          <h3 className='text-lg font-bold'>{name}</h3>
+          <div className='flex items-center gap-2 h-12'>
+            <h3 className='text-md font-semibold'>{name}</h3>
+          </div>
           <div className='flex items-center gap-2'>
             <MapPin size={16} />
             <p className='text-md'>{location}</p>
