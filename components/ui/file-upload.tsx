@@ -38,16 +38,14 @@ const FileUpload = ({ id, value, onChange, error }: FileUploadProps) => {
   }, [value])
 
   return (
-    <div className='w-full'>
-      <label
-        htmlFor={id}
-        className='mb-1 text-sm font-medium text-neutral-700 dark:text-neutral-200'>
+    <div className='w-full flex flex-col gap-2'>
+      <label htmlFor={id} className='text-md font-semibold'>
         Imagen del evento
       </label>
       <div
         {...getRootProps()}
         className={twMerge(
-          'flex items-center justify-center w-full border-2 border-dashed rounded-2xl transition p-6 h-40 text-sm cursor-pointer',
+          'flex items-center justify-center w-full rounded-2xl transition h-40 text-sm cursor-pointer bg-slate-100',
           isDragActive
             ? 'border-blue-500 bg-blue-50'
             : 'border-neutral-300 dark:border-neutral-600',
@@ -55,6 +53,7 @@ const FileUpload = ({ id, value, onChange, error }: FileUploadProps) => {
         )}>
         <input id={id} {...getInputProps()} />
         {preview && (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={preview}
             alt='Preview'

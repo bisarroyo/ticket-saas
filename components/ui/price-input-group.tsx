@@ -1,19 +1,6 @@
 import InputClient from './input-client'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
-
-// Define la estructura de tu formulario
-interface FormValues {
-  date_start: string
-  date_end: string
-  name: string
-  description: string
-  url: string
-  capacity: number
-  prices: { location: string; price: number }[]
-  status?: string
-  aditional_info?: string[]
-  // otros campos si los hay
-}
+import { FormValues } from '@/types/types'
 
 type Props = {
   index: number

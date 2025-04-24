@@ -5,20 +5,12 @@ import TimePicker from '@/components/ui/time-picker'
 import { combineDateAndTime } from '@/lib/utils'
 import { UseFormSetValue } from 'react-hook-form'
 
+import { FormValues } from '@/types/types'
+
 interface DateRangeProps {
   startName: string
   endName: string
-  setValue: UseFormSetValue<{
-    date_start: string
-    date_end: string
-    name: string
-    description: string
-    url: string
-    capacity: number
-    prices: { location: string; price: number }[]
-    status?: string
-    aditional_info?: string[]
-  }>
+  setValue: UseFormSetValue<FormValues>
   errors: {
     [key: string]: {
       message?: string

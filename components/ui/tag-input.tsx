@@ -1,5 +1,5 @@
-import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { useState } from 'react'
+import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 
 // Usa un genérico para permitir diferentes tipos de formularios
 type Props<T extends FieldValues> = {
@@ -21,13 +21,13 @@ export default function TagInput<T extends FieldValues>({
       control={control}
       render={({ field }) => (
         <div>
-          <label className='block text-sm font-medium mb-1'>{label}</label>
+          <label className='block text-md font-medium mb-1'>{label}</label>
           <div className='flex gap-2 mb-2'>
             <input
               type='text'
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className='border px-2 py-1 rounded'
+              className='pl-4 pr-8 py-2 w-full border rounded-md focus:ring-1 focus-visible:outline-hidden focus:outline-hidden focus:ring-primary/50 bg-slate-100'
               placeholder='Ej: sin alcohol'
             />
             <button
