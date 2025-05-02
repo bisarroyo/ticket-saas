@@ -1,10 +1,11 @@
 'use client'
+import { useParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 import SingleEvent from '@/components/events/single-event'
 import NotFound from '@/components/ui/not-found'
 import Loading from '@/components/ui/loading'
 
-import { useParams } from 'next/navigation'
 import useSingleEvent from '@/hooks/useSingleEvent'
 
 export default function Page() {
@@ -14,6 +15,8 @@ export default function Page() {
     : params.id
 
   const { data: event, loading, error } = useSingleEvent(id)
+
+  console.log('event', event)
 
   // Manejar errores o casos donde no se encuentre el evento
   if (loading) {
@@ -33,18 +36,20 @@ export default function Page() {
 
   // // Renderizar el evento si todo está correcto
   return (
-    <section className='my-5'>
-      <SingleEvent
-        events={event}
-        id={event.id}
-        name={event.name}
-        url={event.event_image}
-        date={event.date}
-        location={event.locations[0]?.name || 'Ubicación no disponible'}
-        description={event.description}
-        aditional_info={event.aditional_info || 'Sin información adicional'}
-        prices={event.prices}
-      />
-    </section>
+    <Suspense fallback={<Loading />}>
+      <section className='my-5'>
+        <SingleEvent
+          events={event}
+          id={event.id}
+          name={event.name}
+          url={event.event_image}
+          date={event.date}
+          location={event.locations[0]?.name || 'Ubicación no disponible'}
+          description={event.description}
+          aditional_info={event.aditional_info || 'Sin información adicional'}
+          prices={event.prices}
+        />
+      </section>
+    </Suspense>
   )
 }
