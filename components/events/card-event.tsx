@@ -1,7 +1,7 @@
 import { Calendar, Clock, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import { useTransition } from 'react'
 
 type Props = {
   location: string
@@ -21,8 +21,16 @@ export default function CardEvent({
   image
 }: Props) {
   const router = useRouter()
+
+  const [isPending, startTransition] = useTransition()
+
+  const handleClick = () => {
+    startTransition(() => {
+      router.push(url)
+    })
+  }
   return (
-    <div onClick={() => router.push(url)} className='w-full'>
+    <div onClick={handleClick} className='w-full cursor-pointer'>
       <div className='bg-white/20 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out p-2'>
         <div className='aspect-16/7 rounded-2xl overflow-hidden'>
           <Image
@@ -51,6 +59,7 @@ export default function CardEvent({
           </div>
         </div>
       </div>
+      <p>{isPending && 'Loading'}</p>
     </div>
   )
 }
