@@ -16,8 +16,6 @@ export default function Page() {
 
   const { data: event, loading, error } = useSingleEvent(id)
 
-  console.log('event', event)
-
   // Manejar errores o casos donde no se encuentre el evento
   if (loading) {
     return (

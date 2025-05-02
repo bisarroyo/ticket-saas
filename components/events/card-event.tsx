@@ -1,6 +1,6 @@
 import { Calendar, Clock, MapPin } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 type Props = {
@@ -20,8 +20,9 @@ export default function CardEvent({
   time,
   image
 }: Props) {
+  const router = useRouter()
   return (
-    <Link href={url}>
+    <div onClick={() => router.push(url)} className='w-full'>
       <div className='bg-white/20 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out p-2'>
         <div className='aspect-16/7 rounded-2xl overflow-hidden'>
           <Image
@@ -50,6 +51,6 @@ export default function CardEvent({
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
