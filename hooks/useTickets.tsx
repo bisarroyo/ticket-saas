@@ -12,25 +12,25 @@ export default function useTickets() {
     const fetchTickets = async () => {
       setLoading(true)
       try {
+        const supabase = createClient()
+        const { data, error: queryError } = await supabase
+          .from('tickets_sold')
+          .select(
+            'id, created_at, status, events(id, name, event_image, date, starts_at, locations(id, name))'
+          )
+          .eq('is_active', true)
+          .returns<TicketSoldWithLocationType[]>()
+        if (queryError) {
+          setError('Error al realizar la consulta')
+          console.log(queryError)
+          setLoading(false)
+        } else {
+          setData(data)
+          setLoading(false)
+        }
       } catch (e) {
         setError('Error al obtener tus eventos')
         console.log(e)
-      }
-      const supabase = createClient()
-      const { data, error: queryError } = await supabase
-        .from('tickets_sold')
-        .select(
-          'id, created_at, status, events(id, name, event_image, date, starts_at, locations(id, name))'
-        )
-        .eq('is_active', true)
-        .returns<TicketSoldWithLocationType[]>()
-      if (queryError) {
-        setError('Error al realizar la consulta')
-        console.log(queryError)
-        setLoading(false)
-      } else {
-        setData(data)
-        setLoading(false)
       }
     }
 
