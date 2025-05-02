@@ -101,7 +101,8 @@ const CreateForm = () => {
             status: data.status ?? 'draft',
             url: data.url ?? null,
             user_manager: user?.id ?? '',
-            event_image: imageUrl ?? ''
+            event_image: imageUrl ?? '',
+            venue_id: 'default-venue-id' // Cambia esto por el ID del venue que desees
           }
         ])
         .select()
