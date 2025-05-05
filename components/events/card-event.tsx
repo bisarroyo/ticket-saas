@@ -1,9 +1,10 @@
 import { Calendar, Clock, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useTransition } from 'react'
+import { useEffect, useTransition } from 'react'
 
 type Props = {
+  showLoading: (loading: boolean) => void
   location: string
   name: string
   url: string
@@ -13,6 +14,7 @@ type Props = {
 }
 
 export default function CardEvent({
+  showLoading,
   location,
   name,
   url,
@@ -23,6 +25,10 @@ export default function CardEvent({
   const router = useRouter()
 
   const [isPending, startTransition] = useTransition()
+
+  useEffect(() => {
+    showLoading(isPending)
+  }, [isPending, showLoading])
 
   const handleClick = () => {
     startTransition(() => {
@@ -59,7 +65,6 @@ export default function CardEvent({
           </div>
         </div>
       </div>
-      <p>{isPending && 'Loading'}</p>
     </div>
   )
 }

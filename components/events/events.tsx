@@ -7,7 +7,11 @@ import Loading from '@/components/ui/loading'
 // state
 import useEvents from '@/hooks/useEvents'
 
-export default function Events() {
+type Props = {
+  showLoading: (loading: boolean) => void
+}
+
+export default function Events({ showLoading }: Props) {
   const { data: events, loading, error } = useEvents()
   if (error) {
     return <div>error</div>
@@ -24,6 +28,7 @@ export default function Events() {
           <div className=' py-5 gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center align-middle'>
             {events?.map((event: EventsWithLocationType) => (
               <CardEvent
+                showLoading={showLoading}
                 key={event.id}
                 location={event.locations[0]?.name}
                 name={event.name}
