@@ -3,6 +3,8 @@ import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
+import { useUser } from '@clerk/nextjs'
+
 // validation
 import { createSchema } from '@/utils/validations/validations'
 
@@ -15,13 +17,16 @@ import FileUpload from '@/components/ui/file-upload'
 import PriceInputGroup from '@/components/ui/price-input-group'
 import TagInput from '@/components/ui/tag-input'
 
-// supabase
-import { createClient } from '@/utils/supabase/client'
 import { useState } from 'react'
+
+// supabase
+import { useSupabase } from '@/lib/supabase-provider'
 
 type FormInputs = z.infer<typeof createSchema>
 
 const CreateForm = () => {
+  const { user } = useUser()
+
   const [imageFile, setImageFile] = useState<File | null>(null)
 
   const {
@@ -52,11 +57,14 @@ const CreateForm = () => {
     control
   })
 
-  const supabase = createClient()
+  const { supabase } = useSupabase()
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     let imageUrl = null
-    console.log('data', data)
+
+    if (!supabase) {
+      return
+    }
 
     try {
       if (imageFile) {
@@ -81,9 +89,6 @@ const CreateForm = () => {
         }
       }
 
-      const {
-        data: { user }
-      } = await supabase.auth.getUser()
       const { data: insertedEvent, error } = await supabase
         .from('events')
         .insert([
@@ -101,8 +106,9 @@ const CreateForm = () => {
             status: data.status ?? 'draft',
             url: data.url ?? null,
             user_manager: user?.id ?? '',
+            user_id: user?.id,
             event_image: imageUrl ?? '',
-            venue_id: 'default-venue-id' // Cambia esto por el ID del venue que desees
+            venue_id: '144de7b8-af8d-41cb-87bf-aa61292e3cce' // Cambia esto por el ID del venue que desees
           }
         ])
         .select()
