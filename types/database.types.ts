@@ -124,6 +124,7 @@ export type Database = {
           status: string
           updated_at: string
           url: string | null
+          user_id: string | null
           user_manager: string
           venue_id: string
         }
@@ -146,6 +147,7 @@ export type Database = {
           status: string
           updated_at?: string
           url?: string | null
+          user_id?: string | null
           user_manager: string
           venue_id: string
         }
@@ -168,17 +170,11 @@ export type Database = {
           status?: string
           updated_at?: string
           url?: string | null
+          user_id?: string | null
           user_manager?: string
           venue_id?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "events_user_manager_fkey"
-            columns: ["user_manager"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "events_venue_id_fkey"
             columns: ["venue_id"]
@@ -381,6 +377,24 @@ export type Database = {
           },
         ]
       }
+      tasks: {
+        Row: {
+          id: number
+          name: string
+          user_id: string
+        }
+        Insert: {
+          id?: number
+          name: string
+          user_id?: string
+        }
+        Update: {
+          id?: number
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       tickets: {
         Row: {
           created_at: string | null
@@ -555,6 +569,10 @@ export type Database = {
       release_expired_seats: {
         Args: Record<PropertyKey, never>
         Returns: number
+      }
+      requesting_user_id: {
+        Args: Record<PropertyKey, never>
+        Returns: string
       }
     }
     Enums: {
