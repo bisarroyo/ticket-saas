@@ -1,44 +1,22 @@
 'use client'
-import { createClient } from '@/utils/supabase/client'
 import Logo from '@/components/ui/logo'
+import Button from '@/components/ui/button'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { Dropdown, DropdownItem } from '@/components/ui/dropdow'
-import {
-  CalendarPlus,
-  Compass,
-  LogOut,
-  Settings,
-  Tickets,
-  User
-} from 'lucide-react'
-import { useRouter, usePathname } from 'next/navigation'
+
+import { Compass, Tickets, CirclePlus } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+
 export default function Header() {
-  const supabase = createClient()
-  const router = useRouter()
   const pathname = usePathname()
-
-  const [user, setUser] = useState<string | null>()
-
-  const logout = async () => {
-    await supabase.auth.signOut()
-    setUser(null)
-    router.push('/login')
-  }
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { user }
-      } = await supabase.auth.getUser()
-
-      if (user) setUser(user.user_metadata.name)
-    }
-
-    fetchUser()
-  }, [supabase.auth])
 
   const activeLink = (path: string) => {
     return path === pathname
@@ -58,57 +36,44 @@ export default function Header() {
               className={cn(
                 'text-black hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
                 activeLink('/') && 'text-primary opacity-100'
-              )}
-            >
+              )}>
               <Compass className='h-8 w-8 md:h-5 md:w-5' />
               <span className='hidden md:block'>Explorar</span>
             </Link>
-            {user && (
-              <>
-                <Link
-                  href='/tickets'
-                  className={cn(
-                    ' text-black hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
-                    activeLink('/tickets') && 'text-primary'
-                  )}
-                >
-                  <Tickets className='h-8 w-8 md:h-5 md:w-5' />
-                  <span className='hidden md:block'>Mis Eventos</span>
-                </Link>
-              </>
-            )}
+
+            <SignedIn>
+              <Link
+                href='/tickets'
+                className={cn(
+                  ' text-black hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                  activeLink('/tickets') && 'text-primary'
+                )}>
+                <Tickets className='h-8 w-8 md:h-5 md:w-5' />
+                <span className='hidden md:block'>Mis Eventos</span>
+              </Link>
+              <Link
+                href='/create'
+                className={cn(
+                  ' text-black hover:text-primary transition-all duration-300 flex justify-center items-center gap-2',
+                  activeLink('/tickets') && 'text-primary'
+                )}>
+                <CirclePlus className='h-8 w-8 md:h-5 md:w-5' />
+                <span className='hidden md:block'>Crear Evento</span>
+              </Link>
+            </SignedIn>
           </div>
           <div className=''>
-            {user ? (
-              <div>
-                <Dropdown icon={<User />}>
-                  <Link href='/profile'>
-                    <DropdownItem icon={<User size={20} />}>
-                      <p>Mi perfil</p>
-                    </DropdownItem>
-                  </Link>
-                  <Link href='/profile/settings'>
-                    <DropdownItem icon={<Settings size={20} />}>
-                      <p>Ajustes</p>
-                    </DropdownItem>
-                  </Link>
-                  <Link href='/create'>
-                    <DropdownItem icon={<CalendarPlus size={20} />}>
-                      <p>Crear Evento</p>
-                    </DropdownItem>
-                  </Link>
-                  <DropdownItem
-                    icon={<LogOut size={20} />}
-                    className='text-red-500 hover:bg-red-100'
-                    onClick={logout}
-                  >
-                    <p>Cerrar sesión</p>
-                  </DropdownItem>
-                </Dropdown>
-              </div>
-            ) : (
-              <Link href='/login'>Iniciar Sesión</Link>
-            )}
+            <SignedOut>
+              <SignInButton mode='modal'>
+                <Button text='Iniciar Sesión' variant='header' />
+              </SignInButton>
+              <SignUpButton mode='modal'>
+                <Button text='Registrate' variant='ghost' />
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton showName />
+            </SignedIn>
           </div>
         </div>
       </header>

@@ -14,8 +14,10 @@ const buttonVariants = cva(
           'border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground',
         secondary:
           'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline'
+        ghost: 'hover:bg-accent hover:text-accent-foreground text-sm',
+        link: 'text-primary underline-offset-4 hover:underline',
+        header:
+          'bg-primary text-primary-foreground shadow-xl hover:bg-primary text-sm py-1 px-4'
       }
     },
     defaultVariants: {
@@ -47,8 +49,7 @@ const Button: React.FC<InputProps> = ({
       className={cn(buttonVariants({ variant, className }))}
       disabled={isPending}
       type={type}
-      {...props}
-    >
+      {...props}>
       {isPending ? textLoading : text}
     </button>
   )
