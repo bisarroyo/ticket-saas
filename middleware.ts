@@ -4,7 +4,12 @@ const isPublicRoute = createRouteMatcher([
   '/',
   '/sign-in(.*)',
   '/sign-up(.*)',
-  '/sba(.*)'
+  '/sba(.*)',
+  '/events(.*)',
+  '/events/:id(.*)',
+  '/tickets(.*)',
+  '/tickets/:id(.*)',
+  '/buy(.*)'
 ])
 
 export default clerkMiddleware(
