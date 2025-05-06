@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
         search: ''
       }
     ]
+  },
+  env: {
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+    // Otras variables de Clerk que necesites
   }
 }
 
