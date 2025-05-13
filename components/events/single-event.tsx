@@ -26,7 +26,7 @@ export default function SingleEvent({
           <div className='w-full flex flex-col justify-center md:justify-start md:items-start items-center'>
             <EventDetails date={date} location={location} isAvailable={false} />
             <Link
-              href={`/buy/${id}`}
+              href={`/buy?id=${id}`}
               className='bg-primary text-primary-foreground border-primary shadow-xl hover:bg-primary/80 text-md py-2 px-4 text-center rounded-md w-full focus:outline-hidden transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'>
               Adquirir entradas
             </Link>
