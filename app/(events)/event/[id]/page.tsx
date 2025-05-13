@@ -10,9 +10,12 @@ import NotFound from '@/components/ui/not-found'
 
 import { createClient } from '@/utils/supabase/server'
 
-export default async function Page({ params }: { params: { id: string } }) {
-  console.log('id', params.id)
-  const { id } = params
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
 
   const supabase = await createClient()
   const { data: event, error } = await supabase
