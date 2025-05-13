@@ -1,6 +1,7 @@
 'use client'
 
 import Events from '@/components/events/events'
+import PageLoader from '@/components/page-loader'
 import { useState } from 'react'
 
 export default function Page() {
@@ -9,7 +10,7 @@ export default function Page() {
     <section className='container my-5 max-w-6xl'>
       <h1>Eventos</h1>
       <Events showLoading={setLoading} />
-      <p>{loading && 'loading'}</p>
+      <PageLoader loading={loading} />
     </section>
   )
 }
