@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
-const useSingleEvent = (id: string | undefined) => {
-  const [data, setData] = useState<EventsWithLocationType>()
+const useSingleEvent = (id: string) => {
+  const [event, setEvent] = useState<EventsType>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -17,16 +17,19 @@ const useSingleEvent = (id: string | undefined) => {
 
       try {
         const { data, error } = await supabase
-          .from('events') // Tipar explícitamente la tabla como Event
-          .select(
-            'name, description, id, date, event_image, aditional_info, prices, locations(name)'
-          )
+          .from('events')
+          .select('*')
           .eq('id', id)
           .single()
-        if (error) throw error
-        setData(data)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error fetching data')
+        if (error) {
+          setError('Error al obtener la información del evento')
+        }
+        if (data) {
+          setEvent(data)
+        }
+      } catch (e) {
+        setError('Error al obtener la información del evento')
+        console.log(e)
       } finally {
         setLoading(false)
       }
@@ -35,7 +38,7 @@ const useSingleEvent = (id: string | undefined) => {
     fetchData()
   }, [supabase, id])
 
-  return { data, loading, error }
+  return { event, loading, error }
 }
 
 export default useSingleEvent

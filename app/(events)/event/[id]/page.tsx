@@ -1,38 +1,23 @@
 'use client'
 
 import SingleEvent from '@/components/events/single-event'
+import Loading from '@/components/ui/loading'
 import NotFound from '@/components/ui/not-found'
-
-import { createClient } from '@/utils/supabase/client'
-import { PostgrestError } from '@supabase/supabase-js'
-import { useEffect, useState, use } from 'react'
+import useSingleEvent from '@/hooks/useSingleEvent'
+import { use } from 'react'
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
 
-  const [event, setEvent] = useState<EventsType | null>(null)
-  const [error, setError] = useState<PostgrestError | null>(null)
+  const { event, loading, error } = useSingleEvent(id)
 
-  useEffect(() => {
-    const fetchEvent = async () => {
-      const supabase = createClient()
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .eq('id', id)
-        .single()
-      if (data) {
-        setEvent(data)
-      }
-      if (error) {
-        setError(error)
-        console.log('Error fetching event:', error)
-      }
-    }
-    if (id) {
-      fetchEvent()
-    }
-  }, [id])
+  if (loading) {
+    return (
+      <div className='flex justify-center items-center'>
+        <Loading />
+      </div>
+    )
+  }
 
   if (!id || !event || error) {
     return (
