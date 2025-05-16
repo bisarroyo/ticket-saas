@@ -1,21 +1,18 @@
 'use client'
 // import BuyTickets from '@/components/buy/buy-tickets'
 
-import { useSearchParams } from 'next/navigation'
-
 // supabase
-import { useSupabase } from '@/lib/supabase-provider'
-import { Suspense, useEffect, useState } from 'react'
-import PageLoader from '@/components/page-loader'
-import { PostgrestError } from '@supabase/supabase-js'
-const Page = () => {
+import { createClient } from '@/utils/supabase/client'
+import { Suspense, use, useEffect, useState } from 'react'
+
+import Loading from '@/components/ui/loading'
+
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const [data, setData] = useState<EventsType | null>(null)
-  const [error, setError] = useState<PostgrestError | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  const searchParams = useSearchParams()
-  const id = searchParams.get('id')
-
-  const { supabase } = useSupabase()
+  const { id } = use(params)
+  const supabase = createClient()
 
   useEffect(() => {
     const getEvent = async () => {
@@ -29,7 +26,10 @@ const Page = () => {
         .single()
       if (error) {
         console.log('Error fetching event:', error)
-        setError(error)
+        setError('Error al cargar el evento')
+      } else if (!data) {
+        console.log('No event found')
+        setError('Evento no encontrado')
       } else {
         console.log('Event data:', data)
         setData(data)
@@ -40,12 +40,12 @@ const Page = () => {
   if (!id || error) {
     return (
       <section className='container'>
-        <h1>Evento no encontrado</h1>
+        <h1>{error}</h1>
       </section>
     )
   }
   return (
-    <Suspense fallback={<PageLoader loading={true} />}>
+    <Suspense fallback={<Loading />}>
       <section className='container'>
         {data?.id}
         {/* <BuyTickets id={id} /> */}
@@ -53,5 +53,3 @@ const Page = () => {
     </Suspense>
   )
 }
-
-export default Page
