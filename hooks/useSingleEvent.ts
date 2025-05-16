@@ -2,12 +2,11 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
+const supabase = createClient()
 const useSingleEvent = (id: string) => {
   const [event, setEvent] = useState<EventsType>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-
-  const supabase = createClient()
 
   useEffect(() => {
     if (!id) return
@@ -23,20 +22,19 @@ const useSingleEvent = (id: string) => {
           .single()
         if (error) {
           setError('Error al obtener la información del evento')
-        }
-        if (data) {
+        } else if (data) {
           setEvent(data)
         }
       } catch (e) {
         setError('Error al obtener la información del evento')
-        console.log(e)
+        console.error(e)
       } finally {
         setLoading(false)
       }
     }
 
     fetchData()
-  }, [supabase, id])
+  }, [id])
 
   return { event, loading, error }
 }

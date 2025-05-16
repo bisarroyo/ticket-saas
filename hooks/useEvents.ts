@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
+const supabase = createClient()
 const useEvents = () => {
   const [data, setData] = useState<EventsWithLocationType[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-
-  const supabase = createClient()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,17 +18,21 @@ const useEvents = () => {
           .select(
             'name, description, id, date, event_image, aditional_info, prices, locations(name)'
           )
-        if (error) throw error
-        setData(data)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error fetching data')
+        if (error) {
+          setError('Error al cargar los eventos')
+        } else if (data) {
+          setData(data)
+        }
+      } catch (e) {
+        setError('Error al obtener la información de los eventos')
+        console.error(e)
       } finally {
         setLoading(false)
       }
     }
 
     fetchData()
-  }, [supabase])
+  }, [])
 
   return { data, loading, error }
 }
