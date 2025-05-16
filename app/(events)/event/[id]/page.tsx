@@ -5,10 +5,10 @@ import NotFound from '@/components/ui/not-found'
 
 import { createClient } from '@/utils/supabase/client'
 import { PostgrestError } from '@supabase/supabase-js'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 
-export default function Page({ params }: { params: { id: string } }) {
-  const { id } = params
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
 
   const [event, setEvent] = useState<EventsType | null>(null)
   const [error, setError] = useState<PostgrestError | null>(null)
