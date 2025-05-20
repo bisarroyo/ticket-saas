@@ -3,7 +3,7 @@ import { createClient } from '@/utils/supabase/client'
 
 const supabase = createClient()
 const useEvents = () => {
-  const [data, setData] = useState<EventsWithLocationType[]>([])
+  const [data, setData] = useState<AllEvents[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -15,9 +15,7 @@ const useEvents = () => {
       try {
         const { data, error } = await supabase
           .from('events') // Tipar explícitamente la tabla como Event
-          .select(
-            'name, description, id, date, event_image, aditional_info, prices, locations(name)'
-          )
+          .select('id, name, date, starts_at, event_image, venue_id(name)')
         if (error) {
           setError('Error al cargar los eventos')
         } else if (data) {
