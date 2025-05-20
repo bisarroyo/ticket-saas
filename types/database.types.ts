@@ -111,6 +111,7 @@ export type Database = {
           created_at: string
           date: string
           description: string | null
+          display_map: boolean
           duration: number | null
           ends_at: string
           event_image: string
@@ -118,6 +119,7 @@ export type Database = {
           image_url: string | null
           is_active: boolean
           is_online: boolean
+          map: boolean
           name: string
           prices: Json | null
           starts_at: string
@@ -125,7 +127,6 @@ export type Database = {
           updated_at: string
           url: string | null
           user_id: string | null
-          user_manager: string
           venue_id: string
         }
         Insert: {
@@ -134,6 +135,7 @@ export type Database = {
           created_at?: string
           date: string
           description?: string | null
+          display_map?: boolean
           duration?: number | null
           ends_at: string
           event_image: string
@@ -141,6 +143,7 @@ export type Database = {
           image_url?: string | null
           is_active?: boolean
           is_online?: boolean
+          map?: boolean
           name: string
           prices?: Json | null
           starts_at: string
@@ -148,7 +151,6 @@ export type Database = {
           updated_at?: string
           url?: string | null
           user_id?: string | null
-          user_manager: string
           venue_id: string
         }
         Update: {
@@ -157,6 +159,7 @@ export type Database = {
           created_at?: string
           date?: string
           description?: string | null
+          display_map?: boolean
           duration?: number | null
           ends_at?: string
           event_image?: string
@@ -164,6 +167,7 @@ export type Database = {
           image_url?: string | null
           is_active?: boolean
           is_online?: boolean
+          map?: boolean
           name?: string
           prices?: Json | null
           starts_at?: string
@@ -171,7 +175,6 @@ export type Database = {
           updated_at?: string
           url?: string | null
           user_id?: string | null
-          user_manager?: string
           venue_id?: string
         }
         Relationships: [
@@ -343,7 +346,6 @@ export type Database = {
           id: string
           name: string
           price: number
-          section_id: string
           updated_at: string | null
           venue_id: string
         }
@@ -353,7 +355,6 @@ export type Database = {
           id?: string
           name: string
           price: number
-          section_id: string
           updated_at?: string | null
           venue_id: string
         }
@@ -363,7 +364,6 @@ export type Database = {
           id?: string
           name?: string
           price?: number
-          section_id?: string
           updated_at?: string | null
           venue_id?: string
         }
@@ -376,24 +376,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      tasks: {
-        Row: {
-          id: number
-          name: string
-          user_id: string
-        }
-        Insert: {
-          id?: number
-          name: string
-          user_id?: string
-        }
-        Update: {
-          id?: number
-          name?: string
-          user_id?: string
-        }
-        Relationships: []
       }
       tickets: {
         Row: {
