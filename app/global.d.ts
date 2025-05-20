@@ -25,4 +25,59 @@ declare global {
     }
     payment_id: PaymentsType
   }
+
+  //Types for get all events
+  type AllEvents = {
+    id: string
+    name: string
+    date: string
+    starts_at: string
+    event_image: string
+    venue_id: {
+      name: string
+    }
+  }
+  // typews for single event
+  type SingleEvent = {
+    id: string
+    name: string
+    description: string | null
+    prices: Json | null
+    starts_at: string
+    ends_at: string
+    event_image: string
+    aditional_info: Json[] | null
+    venue_id: {
+      name: string
+      city: string | null
+    }
+  }
+  // types for buy tickets
+  type BuyEvent = {
+    id: string
+    name: string
+    map: boolean
+    prices: Json | null
+    starts_at: string
+    ends_at: string
+    event_image: string
+    aditional_info: Json[] | null
+    display_map: bool
+    venue_id: {
+      name: string
+      city: string | null
+      sections: {
+        id: string
+        name: string
+        price: number
+        color: string
+        seats: {
+          id: string
+          event_seats: {
+            id: string
+          }[]
+        }[]
+      }[]
+    }
+  }
 }
