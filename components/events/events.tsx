@@ -22,10 +22,10 @@ export default function Events() {
           </div>
         ) : (
           <div className=' py-5 gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center align-middle'>
-            {events?.map((event: EventsWithLocationType) => (
+            {events?.map((event: AllEvents) => (
               <CardEvent
                 key={event.id}
-                location={event.locations[0]?.name}
+                location={event.venue_id?.name}
                 name={event.name}
                 url={`/event/${event.id}`}
                 date={format(event.date, { date: 'long' }, 'es')}
