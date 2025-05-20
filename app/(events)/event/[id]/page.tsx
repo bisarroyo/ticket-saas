@@ -34,10 +34,10 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         id={event.id}
         name={event.name}
         url={event.event_image}
-        date={event.date}
-        location={'Ubicación no disponible'}
+        date={event.starts_at}
+        location={event.venue_id.name}
         description={event.description}
-        aditional_info={event.aditional_info || 'Sin información adicional'}
+        aditional_info={event.aditional_info}
         prices={event.prices}
       />
     </section>
