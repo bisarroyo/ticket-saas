@@ -2,9 +2,9 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
-const useSingleEvent = (id: string) => {
+const useBuyTickets = (id: string) => {
   const supabase = createClient()
-  const [event, setEvent] = useState<SingleEvent>()
+  const [event, setEvent] = useState<BuyEvent>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -18,25 +18,30 @@ const useSingleEvent = (id: string) => {
         const { data, error } = await supabase
           .from('events')
           .select(
-            'id, name, description, prices, starts_at, ends_at, event_image, aditional_info, venues(name, city)'
+            'id, name, map, prices, starts_at, ends_at, event_image, aditional_info, display_map, venues(name, city, sections(id, name, price, color, seats(id, event_seats(id))))'
           )
           .eq('id', id)
           .single()
         if (error) {
           setError('Error al obtener la información del evento')
         } else if (data) {
-          console.log(data)
           setEvent({
             id: data.id,
             name: data.name,
-            description: data.description,
+            map: data.map,
             prices: data.prices,
             starts_at: data.starts_at,
             ends_at: data.ends_at,
             event_image: data.event_image,
             aditional_info: data.aditional_info,
-            venue_id: data.venues
+            display_map: data.display_map,
+            venue_id: {
+              name: data.venues.name,
+              city: data.venues.city,
+              sections: [...data.venues.sections]
+            }
           })
+          // setEvent(data.venues.sections)
         }
       } catch (e) {
         setError('Error al obtener la información del evento')
@@ -52,4 +57,4 @@ const useSingleEvent = (id: string) => {
   return { event, loading, error }
 }
 
-export default useSingleEvent
+export default useBuyTickets
